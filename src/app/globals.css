@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@import "tailwindcss";
+
+@import "preline/variants.css";
+@source "../node_modules/preline/dist/*.js";
+
+/* Optional Preline UI Datepicker Plugin */
+/* @import "preline/src/plugins/datepicker/styles.css"; */
+
+/* Plugins */
+/* @plugin "@tailwindcss/forms"; */
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}

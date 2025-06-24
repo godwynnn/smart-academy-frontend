@@ -1,0 +1,35 @@
+{
+  "name": "ssbi",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
+    "lodash": "^4.17.21",
+    "next": "15.3.4",
+    "preline": "^3.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^3.1.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "websocket": "^1.0.35"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4",
+    "@types/react": "19.1.8",
+    "@types/websocket": "^1.0.10",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "tailwindcss": "^4"
+  }
+}
