@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState,useEffect,useRef } from 'react';
+import React, { createContext, useContext, useState,useEffect,useRef, useLayoutEffect } from 'react';
 import { w3cwebsocket } from 'websocket';
 import { Urls } from '../utils/urls';
 import { ChatAction } from '../reducer/reducer.';
@@ -13,6 +13,7 @@ export const ChatContext=createContext()
 const url = Urls()
 export const ChatProvider=({children})=>{
     const [roomName, setRoomName] = useState(null)
+    const [entry,setEntry]=useState('')
     const dispatch=useDispatch()
     const chatData=useSelector((state)=>state.chatreducer)
     const ws = useRef(null)
@@ -25,7 +26,7 @@ export const ChatProvider=({children})=>{
                     if (res.status === 200) {
                         return res.json()
                     } else {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        throw new Error(`HTTP error! status: ${res.status}`);
                     }
         
         
@@ -42,7 +43,7 @@ export const ChatProvider=({children})=>{
     
 
     const SendChatData = (e,prompt_type) => {
-        console.log(prompt_type, roomName)
+        // console.log(prompt_type, roomName)
         
         e.preventDefault()
         dispatch(ChatAction.SetQuestionData({...chatData, 
@@ -53,7 +54,8 @@ export const ChatProvider=({children})=>{
             JSON.stringify({
                 'message': chatData,
                 'username': 'a@gmail.com',
-                'generate_id': roomName.room_name
+                'generate_id': roomName.room_name,
+                'prompt_type':prompt_type
             })
         )
     }
@@ -62,10 +64,10 @@ export const ChatProvider=({children})=>{
     
     
     // WEBSOCKET
+    
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         if (roomName?.room_name) {
-            console.log(roomName.room_name)
             ws.current = new w3cwebsocket(`${url.ws_url}${roomName.room_name}/`)
 
             ws.current.onopen = () => {
@@ -73,20 +75,26 @@ export const ChatProvider=({children})=>{
             }
             ws.current.onmessage = (event) => {
                 const message=JSON.parse(event.data)
-                console.log(message)
+                // console.log(message)
              
-                if (message.type === 'chat_message' || 'chat_history') {
-                    dispatch(ChatAction.SetQuestionData({ ...chatData, 'relayed': true,'data':message,'from_ws':true }))
-                    if(message.sent_by === 'user'){
-                        router.push(`question/c/${roomName.room_name}`)
+                if(message.sent_by === 'user'){
+                        
+                    if (message.type === 'chat_message') {
+                        dispatch(ChatAction.SetQuestionData({ ...chatData, 'relayed': true,'data':message,'from_ws':true }))
+                        router.push(`${prompt_type}/c/${roomName.room_name}`)
+                    }
+                    if (message.type ==='chat_history'){
+                        dispatch(ChatAction.SetQuestionData({'relayed': true,'data':message,'from_ws':true }))
+
                     }
                     
-                    
+
                 }
 
             }
         }
     },[roomName])
+console.log(roomName)
 
 
     const startSocketConnection=()=>{
@@ -100,7 +108,7 @@ export const ChatProvider=({children})=>{
 
 
     return(
-        <ChatContext.Provider value={{SendChatData,fetchRoomName,roomName,startSocketConnection,setRoomName}}>
+        <ChatContext.Provider value={{SendChatData,fetchRoomName,roomName,startSocketConnection,setRoomName,setEntry,entry}}>
             {children}
         
         </ChatContext.Provider>

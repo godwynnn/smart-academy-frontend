@@ -24,7 +24,7 @@ export const ChatSlice=createSlice({
             state.relayed=action.payload.relayed
             state.prompt_type=action.payload.prompt_type
             if (action.payload.from_ws === true){
-                state.data=[...state.data, action.payload.data]
+                state.data=[action.payload.data]
             }
             
         }

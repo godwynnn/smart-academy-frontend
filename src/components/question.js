@@ -1,64 +1,15 @@
-"use client"
-import React, { useState, useEffect, useRef, createContext, useContext } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { ChatReducer } from '../../../../../reducer/reducer.'
-import { ChatAction } from '../../../../../reducer/reducer.'
-import { useRouter } from 'next/navigation';
-import Sidebar from '../../../../../components/sidebar'
-import { useSearchParams } from 'next/navigation'
-import { useParams } from 'next/navigation'
-import { ChatContext } from '../../../../../components/Chatcontext'
+import React from 'react'
 
-
-
-export default function Chat() {
-
-  const dispatch = useDispatch()
-  const chatData = useSelector((state) => state.chatreducer)
-  const ws = useRef(null)
-  const router = useRouter()
-  const params = useParams()
-  const { fetchRoomName, roomName, SendChatData, startSocketConnection, setRoomName } = useContext(ChatContext)
-
-
-  useEffect(() => {
-
-
-    setRoomName({ 'room_name': params.id })
-
-    console.log(chatData)
-
-  }, [])
-
-
-
+function QuestionComponent({chatData}) {
   return (
-    <Sidebar>
-
-      {/* <!-- Content --> */}
-      <div className="relative h-screen w-full lg:ps-64">
-        <div className="py-10 lg:py-14">
-          {/* <!-- Title /--> */}
-          <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
-            <h1 className="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
-              Welcome to Smart Academy
-            </h1>
-            <p className="mt-3 text-gray-600 dark:text-neutral-400">
-              Your AI-powered Educator
-            </p>
-          </div>
-        </div>
-        {/* <!-- End Title --> */}
-
-
-        {chatData.data.map((val, idx) => {
+    <>
+    {chatData.data.map((val, idx) => {
           return (
             val.type === 'chat_message' ?
 
               (
                 val.sent_by === 'user' ?
-                  <li className="py-2 sm:py-4">
+                  <li className="py-2 sm:py-4" key={idx}>
                     <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto">
                       <div className="max-w-2xl flex gap-x-2 sm:gap-x-4">
                         <span className="shrink-0 inline-flex items-center justify-center size-9.5 rounded-full bg-gray-600">
@@ -75,7 +26,7 @@ export default function Chat() {
                   </li>
                   :
                   val.sent_by === 'ai' ?
-                    <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
+                    <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4" key={idx}>
                       <span className="shrink-0 inline-flex items-center justify-center size-9.5 rounded-full bg-gray-600">
                         <span className="text-sm font-medium text-white">SAi</span>
                       </span>
@@ -173,7 +124,8 @@ export default function Chat() {
 
 
                         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3" >
-                        {val.answer.quiz.map((val, idx) => {
+                        {val.answer != null?
+                          val.answer.quiz.map((val, idx) => {
                           return (<div className="space-y-3" key={idx}>
                             <p className="text-1xl  text-gray-800 dark:text-white">
                               {val.question}
@@ -191,10 +143,10 @@ export default function Chat() {
 
                           </div>)
 
-                        })
-
+                        }) 
+                        :
+                        <p>loading...</p>
                         }
-
                         </div>
 
                       </div>
@@ -213,32 +165,8 @@ export default function Chat() {
 
           )
         })}
-        {/* <!-- Chat Bubble --> */}
-
-        {/* <!-- End Chat Bubble --> */}
-
-
-        {/* <!-- Chat Bubble --> */}
-
-        {/* <!-- End Chat Bubble --> */}
-
-
-
-
-
-        {/* <button type="button" className="p-2 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar" aria-label="Toggle navigation" data-hs-overlay="#hs-application-sidebar">
-        <svg className="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
-        <span>Sidebar</span>
-      </button> */}
-
-
-        {/* <div id="hs-application-sidebar-backdrop" data-hs-overlay-backdrop-template="" style={{zIndex:59}} className="hs-overlay-backdrop transition duration fixed inset-0 bg-gray-900/50 dark:bg-neutral-900/80 "></div> */}
-
-
-
-
-
-      </div>
-    </Sidebar>
+    </>
   )
 }
+
+export default QuestionComponent
