@@ -25,7 +25,7 @@ export default function Question() {
     const chatData = useSelector((state) => state.chatreducer)
     const dispatch = useDispatch()
     const prompt_type = params.entry
-    const { fetchRoomName, roomName, SendChatData, startSocketConnection,setEntry } = useContext(ChatContext)
+    const { fetchRoomName, roomName, SendChatData, startSocketConnection, setEntry } = useContext(ChatContext)
     const [class_no, setClassData] = useState('')
 
     // const [data, setChatData] = useState({
@@ -200,9 +200,9 @@ export default function Question() {
                         </button>
                         :
 
-                        <button className="py-3 px-4  flex  mt-2 w-full text-center items-center justify-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-hidden focus:bg-gray-900 disabled:opacity-50  dark:bg-white dark:text-neutral-800">
-                            loading
-                        </button>
+                        <div className="animate-spin flex size-6  items-center justify-center border-3 border-current border-t-transparent text-gray-400 rounded-full" role="status" aria-label="loading">
+                            <span className="sr-only">Loading...</span>
+                        </div>
 
                     }
 

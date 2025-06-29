@@ -5,7 +5,7 @@ import { ChatAction } from '../reducer/reducer.';
 import { useDispatch } from 'react-redux';
 import { ChatReducer } from '../reducer/reducer.';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 export const ChatContext=createContext()
 
@@ -18,9 +18,10 @@ export const ChatProvider=({children})=>{
     const chatData=useSelector((state)=>state.chatreducer)
     const ws = useRef(null)
     const router=useRouter()
+    const params=useParams()
 
 
-
+    
     const fetchRoomName=()=>{
          fetch(url.entry).then(res => {
                     if (res.status === 200) {
@@ -81,7 +82,7 @@ export const ChatProvider=({children})=>{
                         
                     if (message.type === 'chat_message') {
                         dispatch(ChatAction.SetQuestionData({ ...chatData, 'relayed': true,'data':message,'from_ws':true }))
-                        router.push(`${prompt_type}/c/${roomName.room_name}`)
+                        router.push(`${params.entry}/c/${roomName.room_name}`)
                     }
                     if (message.type ==='chat_history'){
                         dispatch(ChatAction.SetQuestionData({'relayed': true,'data':message,'from_ws':true }))

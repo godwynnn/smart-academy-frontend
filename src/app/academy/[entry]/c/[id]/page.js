@@ -12,7 +12,10 @@ import { ChatContext } from '../../../../../components/Chatcontext'
 import QuestionComponent from '../../../../../components/question'
 import LessonComponent from '../../../../../components/lesson'
 
+import { Urls } from '../../../../../utils/urls'
 
+
+const url = Urls()
 export default function Chat() {
 
   const dispatch = useDispatch()
@@ -20,19 +23,31 @@ export default function Chat() {
   const ws = useRef(null)
   const router = useRouter()
   const params = useParams()
-  const { fetchRoomName, roomName, SendChatData, startSocketConnection, setRoomName,setEntry } = useContext(ChatContext)
+  const { fetchRoomName, roomName, SendChatData, startSocketConnection, setRoomName, setEntry } = useContext(ChatContext)
 
 
- 
+  const ExportToGoogleForm = (e) => {
+    e.preventDefault()
+    fetch(`${url.export_to_form}/${params.id}/`)
+      .then((res) => { return res.json() })
+      .then(data => {
+
+        window.open(data.url, '_blank', 'noopener noreferrer');
+      }
+      )
+
+  }
+
+
   useEffect(() => {
 
 
     setRoomName({ 'room_name': params.id })
 
-    // console.log(chatData)
+
 
   }, [params.id])
-  
+
 
 
   return (
@@ -54,24 +69,38 @@ export default function Chat() {
         {/* <!-- End Title --> */}
 
 
-        
+
         {params.entry === 'question' ?
-          <QuestionComponent chatData={chatData}/>
-        :
-        <LessonComponent chatData={chatData}/>
+          <QuestionComponent chatData={chatData} />
+          :
+          <LessonComponent chatData={chatData} />
         }
-        
-        
-        
-        {/* <!-- Chat Bubble --> */}
-
-        {/* <!-- End Chat Bubble --> */}
 
 
-        {/* <!-- Chat Bubble --> */}
 
-        {/* <!-- End Chat Bubble --> */}
+        <div className="hs-dropdown inline-flex fixed  bottom-5 right-9">
+          <button id="hs-dropdown-default" type="button" className="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            Export
+            <svg className="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+          </button>
 
+          <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-default">
+            <div className="p-1 space-y-0.5">
+
+              <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" onClick={(e) => ExportToGoogleForm(e)} href='#'>
+                Google Form
+              </a>
+              <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" href="#">
+                As PDF
+              </a>
+              <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" href="#">
+                Team Account
+              </a>
+
+
+            </div>
+          </div>
+        </div>
 
 
 
