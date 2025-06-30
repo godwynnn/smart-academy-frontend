@@ -11,9 +11,9 @@ import { useParams } from 'next/navigation'
 import { ChatContext } from '../../../../../components/Chatcontext'
 import QuestionComponent from '../../../../../components/question'
 import LessonComponent from '../../../../../components/lesson'
-
-import { Urls } from '../../../../../utils/urls'
-
+import {HeroNavbar} from '../../../../../components/HeroNavbar'
+import { Urls } from '../../../../../utils/urls';
+import Navbar from '../../../../../components/Navbar'
 
 const url = Urls()
 export default function Chat() {
@@ -55,6 +55,9 @@ export default function Chat() {
 
       {/* <!-- Content --> */}
       <div className="relative h-screen w-full lg:ps-64">
+        <Navbar/>
+
+       
         <div className="py-10 lg:py-14">
           {/* <!-- Title /--> */}
           <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">

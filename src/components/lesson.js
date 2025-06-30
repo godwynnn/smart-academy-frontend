@@ -26,7 +26,7 @@ export default function LessonCompnent({chatData}) {
                   </li>
                   :
                   val.sent_by === 'ai' ?
-                    <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4" key={idx}>
+                    <li className="max-w-4xl py-4 px-2 sm:px-2 lg:px-2 mx-auto flex gap-x-2 sm:gap-x-4" key={idx}>
                       <span className="shrink-0 inline-flex items-center justify-center size-9.5 rounded-full bg-gray-600">
                         <span className="text-sm font-medium text-white">SAi</span>
                       </span>
@@ -117,7 +117,7 @@ export default function LessonCompnent({chatData}) {
                       </div>
 
 
-                      <div className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
+                      <div className="max-w-4xl py-5 px-2 sm:px-2 lg:px-2 mx-auto flex gap-x-2 sm:gap-x-4">
                         <span className="shrink-0 inline-flex items-center justify-center size-9.5 rounded-full bg-gray-600">
                           <span className="text-sm font-medium text-white">SAi</span>
                         </span>
