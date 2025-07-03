@@ -4,11 +4,11 @@ import { Timeline } from "../app/components/ui/timeline";
 export function TimelineDemo() {
   const data = [
     {
-      title: "2024",
+      title: "Teach More. Plan Less",
       content: (
         <div>
           <p
-            className="mb-8 text-xs font-normal text-neutral-300 md:text-sm dark:text-neutral-200">
+            className="mb-8 text-xs font-normal text-neutral-300 md:text-2xl dark:text-neutral-200">
             Built and launched Aceternity UI and Aceternity UI Pro from scratch
           </p>
           <div className="grid grid-cols-2 gap-4">
@@ -29,11 +29,11 @@ export function TimelineDemo() {
       ),
     },
     {
-      title: "Early 2023",
+      title: "Structured Curriculum",
       content: (
         <div>
           <p
-            className="mb-8 text-xs font-normal text-neutral-300 md:text-sm dark:text-neutral-200">
+            className="mb-8 text-xs font-normal text-neutral-300 md:text-2xl dark:text-neutral-200">
             I usually run out of copy, but when I see content this big, I try to
             integrate lorem ipsum.
           </p>
@@ -56,11 +56,11 @@ export function TimelineDemo() {
       ),
     },
     {
-      title: "Changelog",
+      title: "Quizzes That Adapt",
       content: (
         <div>
           <p
-            className="mb-4 text-xs font-normal text-neutral-300 md:text-sm dark:text-neutral-200">
+            className="mb-4 text-xs font-normal text-neutral-300 md:text-2xl dark:text-neutral-200">
             Deployed 5 new components on Aceternity today
           </p>
           

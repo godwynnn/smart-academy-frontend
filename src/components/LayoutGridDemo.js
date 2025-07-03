@@ -5,7 +5,7 @@ import { LayoutGrid } from "../app/components/ui/layout-grid";
 
 export function LayoutGridDemo() {
   return (
-    <div className="min-h-screen py-20 w-[60%] inline-block">
+    <div className="md:h-screen sm:h-[200vh] max-sm:h-[150vh] py-20 lg:w-[60%] md:w-[100%] sm:w-[100%] max-sm:w-[100%] ">
       <LayoutGrid cards={cards} />
     </div>
   );
