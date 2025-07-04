@@ -5,7 +5,7 @@ import { LayoutGrid } from "../app/components/ui/layout-grid";
 
 export function LayoutGridDemo() {
   return (
-    <div className="md:h-screen sm:h-[200vh] max-sm:h-[150vh] py-20 lg:w-[60%] md:w-[100%] sm:w-[100%] max-sm:w-[100%] ">
+    <div className="md:h-screen sm:h-[180vh] max-sm:h-[120vh] py-20 lg:w-[60%] md:w-[100%] sm:w-[100%] max-sm:w-[100%] ">
       <LayoutGrid cards={cards} />
     </div>
   );
@@ -75,24 +75,24 @@ const cards = [
     id: 1,
     content: <SkeletonOne />,
     className: "md:col-span-2",
-    thumbnail: "https://images01.nicepagecdn.com/page/34/33/website-mockup-preview-343339.jpg"
+    thumbnail: "https://tinyurl.com/yz2p73u2"
   },
   {
     id: 2,
     content: <SkeletonTwo />,
     className: "col-span-1",
-    thumbnail: "https://images01.nicepagecdn.com/page/34/33/website-mockup-preview-343339.jpg"
+    thumbnail: "https://tinyurl.com/5xaynzb2"
     },
   {
     id: 3,
     content: <SkeletonThree />,
-    className: "col-span-1",
-    thumbnail: "https://images01.nicepagecdn.com/page/34/33/website-mockup-preview-343339.jpg"
+    className: "col-span-1 max-sm:hidden sm:hidden md:block",
+    thumbnail: "https://tinyurl.com/bdbty6mn"
     },
   {
     id: 4,
     content: <SkeletonFour />,
-    className: "md:col-span-2",
-    thumbnail: "https://images01.nicepagecdn.com/page/34/33/website-mockup-preview-343339.jpg"
+    className: "md:col-span-2 max-sm:hidden sm:hidden md:block",
+    thumbnail: "https://tinyurl.com/3dfnyfd6"
     },
 ];
