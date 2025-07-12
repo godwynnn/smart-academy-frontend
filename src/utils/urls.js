@@ -5,7 +5,9 @@ export const Urls=()=>{
         ws_url:'ws://127.0.0.1:8000/ws/chat/',
         entry:`${url}entry/`,
         questions:`${url}questions`,
-        export_to_form:`${url}export/form`
+        export_to_form:`${url}export/form`,
+        login:`${url}auth/login/`,
+        register:`${url}auth/register/`,
         
 
 

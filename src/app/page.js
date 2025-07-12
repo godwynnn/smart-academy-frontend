@@ -13,7 +13,7 @@ import { useGSAP } from "@gsap/react";
 import { useEffect, useRef } from "react";
 import Footer from '../components/Footer'
 import { ContainerTextFlipDemo } from '../components/ContainerTextFlipDemo'
-import {horizontalLoop} from '../components/HorizontalLoop'
+import { horizontalLoop } from '../components/HorizontalLoop'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +23,7 @@ export default function Home() {
 
   const HeroRef = useRef()
   const marqueeHolderRef = useRef()
-  const marqueeContents=['Generate.','Teach.','Assess.']
+  const marqueeContents = ['Generate.', 'Teach.', 'Assess.']
 
 
 
@@ -103,7 +103,7 @@ export default function Home() {
   useGSAP(() => {
     const marquees = gsap.utils.toArray(".marquee_item");
 
-    const loop = horizontalLoop(gsap,marquees, {
+    const loop = horizontalLoop(gsap, marquees, {
       repeat: -1,
 
       paddingRight: 0,
@@ -143,60 +143,129 @@ export default function Home() {
 
           <div className="px-4 py-0  md:py-0">
 
-            <div className="min-h-[120vh] md:mx-20 mt-0 md:w-[50%] flex flex-col justify-center">
-              <h1
-                className="relative z-10  max-sm:mx-auto max-sm:text-center max-w-4xl  text-5xl font-semibold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
-                {`Smarter Tools for Smarter`
-                  .split(" ")
-                  .map((word, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                      animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                      transition={{
-                        duration: 0.3,
-                        delay: index * 0.1,
-                        ease: "easeInOut",
-                      }}
-                      className="mr-2 inline-block">
-                      {word}
-                    </motion.span>
-                  ))}<span><ContainerTextFlipDemo /></span>
-              </h1>
-              <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0.3,
-                  delay: 0.8,
-                }}
-                className=" z-10  max-sm:mx-auto max-w-xl max-sm:text-center py-4 text-left text-lg font-normal text-neutral-600 dark:text-neutral-400">
-                Transform Ideas into Assessments Instantly.
-                Build Better Lessons, Faster With AI on Your Side,Turn Your Curriculum into Engaging Lessons.
-              </motion.p>
-              <motion.div
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0.3,
-                  delay: 1,
-                }}
-                className="relative  max-sm:mx-auto z-10 mt-8  gap-4">
-                <button
-                  className="w-60 transform rounded-lg max-sm:mx-auto  bg-[#001219] px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                  Get Started
-                </button>
+            <div className="min-h-[100vh] w-full flex md:flex-row justify-center items-center">
+              <div className=" md:mx-20 mt-0 md:w-[50%] flex flex-col justify-center  ">
+                <h1
+                  className="relative z-10  max-sm:mx-auto max-sm:text-center max-w-4xl  text-5xl font-semibold text-slate-700 md:text-5xl lg:text-7xl sm:text-3xl dark:text-slate-300">
+                  {`Smarter Tools for Smarter`
+                    .split(" ")
+                    .map((word, index) => (
+                      <motion.span
+                        key={index}
+                        initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+                        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: index * 0.1,
+                          ease: "easeInOut",
+                        }}
+                        className="mr-2 inline-block">
+                        {word}
+                      </motion.span>
+                    ))}<span><ContainerTextFlipDemo /></span>
+                </h1>
+                <motion.p
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.8,
+                  }}
+                  className=" z-10  max-sm:mx-auto max-w-xl max-sm:text-center py-4 text-left text-lg font-normal text-neutral-600 dark:text-neutral-400">
+                  Transform Ideas into Assessments Instantly.
+                  Build Better Lessons, Faster With AI on Your Side,Turn Your Curriculum into Engaging Lessons.
+                </motion.p>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 1,
+                  }}
+                  className="relative  max-sm:mx-auto z-10 mt-8  gap-4">
+                  <button
+                    className="w-60 transform rounded-lg max-sm:mx-auto  bg-[#001219] px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                    Get Started
+                  </button>
 
-              </motion.div>
+                </motion.div>
+              </div>
 
+
+                {/* Masonry Cards */}
+          <div className="w-[40%] px-0 py-0 md:block max-sm:hidden sm:hidden lg:px-0 lg:py-0 mx-auto">
+            {/* Grid */}
+            <div className="grid sm:grid-cols-12 gap-6">
+              <div className="sm:self-end col-span-12 sm:col-span-7 md:col-span-8 lg:col-span-5 lg:col-start-3">
+                {/* Card */}
+                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
+                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
+                      src="https://tinyurl.com/25xbcpr8" alt="Masonry Cards Image" />
+                  </div>
+                  
+                </a>
+                {/* End Card */}
+              </div>
+              {/* End Col */}
+
+              <div className="sm:self-end col-span-12 sm:col-span-5 md:col-span-4 lg:col-span-3 max-sm:hidden sm:hidden md:block">
+                {/* Card */}
+                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
+                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
+                      src="https://tinyurl.com/ev69rn66" alt="Masonry Cards Image" />
+                  </div>
+                  
+                </a>
+                {/* End Card */}
+              </div>
+              {/* End Col */}
+
+             <div className="col-span-12 sm:col-span-6 md:col-span-4">
+                {/* Card */}
+                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
+                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
+                      src="https://tinyurl.com/muyajp7d" alt="Masonry Cards Image" />
+                  </div>
+
+                  
+
+                  
+                </a>
+                {/* End Card */}
+              </div>
+              {/* End Col */}
+
+              <div className="col-span-12 sm:col-span-6 md:col-span-4 max-sm:hidden sm:hidden md:block">
+                {/* Card */}
+                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
+                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
+                      src="https://tinyurl.com/4nrd5dac" alt="Masonry Cards Image" />
+                  </div>
+                 
+
+
+                </a>
+                {/* End Card */}
+              </div>
+              {/* End Col */}
+
+              
+            </div>
+            {/* End Grid */}
+          </div>
+          {/* End Masonry Cards */}
 
 
 
@@ -205,18 +274,18 @@ export default function Home() {
             </div>
 
             <div ref={marqueeHolderRef} className="relative mt-16  p-0 m-0 h-[30vh] whitespace-nowrap  overflow-x-hidden  text-9xl flex flex-row item-center">
-              {Array(2).fill().map((_,idx)=>
+              {Array(2).fill().map((_, idx) =>
                 <div className="marquee_item text-[#001219]" key={idx}>
-                  {marqueeContents.map((val,idx)=>{
+                  {marqueeContents.map((val, idx) => {
                     return <p key={idx}>{val}</p>
                   })}
-                  
-                  
+
+
                 </div>
-              
+
               )}
-              
-            
+
+
             </div>
 
 
@@ -243,7 +312,7 @@ export default function Home() {
               <div
                 className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
                 <img
-                  src="https://assets.aceternity.com/templates/startup-2.webp"
+                  src="https://res.cloudinary.com/dtt4nxboi/image/upload/v1751595040/ssbi_3_hdb9me.png"
                   alt="Landing page preview"
                   className="aspect-[16/9] h-auto w-full object-cover"
                   height={1000}
@@ -292,99 +361,7 @@ export default function Home() {
 
 
 
-          {/* Masonry Cards */}
-          <div className="max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-            {/* Grid */}
-            <div className="grid sm:grid-cols-12 gap-6">
-              <div className="sm:self-end col-span-12 sm:col-span-7 md:col-span-8 lg:col-span-5 lg:col-start-3">
-                {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
-                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
-                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                      src="https://tinyurl.com/25xbcpr8" alt="Masonry Cards Image" />
-                  </div>
-                  <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
-                    <div className="text-sm font-semibold text-gray-800 rounded-lg bg-white p-4 md:text-xl">
-                      Workplace personalities
-                    </div>
-                  </div>
-                </a>
-                {/* End Card */}
-              </div>
-              {/* End Col */}
-
-              <div className="sm:self-end col-span-12 sm:col-span-5 md:col-span-4 lg:col-span-3 max-sm:hidden sm:hidden md:block">
-                {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
-                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
-                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                      src="https://tinyurl.com/ev69rn66" alt="Masonry Cards Image" />
-                  </div>
-                  <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
-                    <div className="text-sm font-semibold text-gray-800 rounded-lg bg-white p-4 md:text-xl">
-                      Women in engineering
-                    </div>
-                  </div>
-                </a>
-                {/* End Card */}
-              </div>
-              {/* End Col */}
-
-              <div className="col-span-12 md:col-span-4 max-sm:hidden sm:hidden md:block">
-                {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
-                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
-                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                      src="https://tinyurl.com/mr2xxpj9" alt="Masonry Cards Image" />
-                  </div>
-                  <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
-                    <div className="text-sm font-semibold text-gray-800 rounded-lg bg-white p-4 md:text-xl">
-                      Pride 2021
-                    </div>
-                  </div>
-                </a>
-                {/* End Card */}
-              </div>
-              {/* End Col */}
-
-              <div className="col-span-12 sm:col-span-6 md:col-span-4 max-sm:hidden sm:hidden md:block">
-                {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
-                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
-                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                      src="https://tinyurl.com/4nrd5dac" alt="Masonry Cards Image" />
-                  </div>
-                  <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
-                    <div className="text-sm font-semibold text-gray-800 rounded-lg bg-white p-4 md:text-xl">
-                      Data at Preline
-                    </div>
-                  </div>
-                </a>
-                {/* End Card */}
-              </div>
-              {/* End Col */}
-
-              <div className="col-span-12 sm:col-span-6 md:col-span-4">
-                {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
-                  <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
-                    <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                      src="https://tinyurl.com/muyajp7d" alt="Masonry Cards Image" />
-                  </div>
-
-                  <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
-                    <div className="text-sm font-semibold text-gray-800 rounded-lg bg-white p-4 md:text-xl">
-                      Empowered management
-                    </div>
-                  </div>
-                </a>
-                {/* End Card */}
-              </div>
-              {/* End Col */}
-            </div>
-            {/* End Grid */}
-          </div>
-          {/* End Masonry Cards */}
+          
         </div>
 
 
