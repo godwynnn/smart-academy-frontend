@@ -68,7 +68,7 @@ export default function Login() {
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-gray-800">Sign in</h1>
             <p className="mt-2 text-sm text-gray-600">
-              Don't have an account yet?
+              Don&apos;t have an account yet?
               <Link className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/auth/register">
                 Sign up here
               </Link>

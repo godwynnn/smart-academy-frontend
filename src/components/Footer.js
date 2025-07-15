@@ -1,5 +1,8 @@
 import React from 'react'
 import {TextHoverEffectDemo} from '../components/TextHoverEffectDemo'
+import Link from 'next/link'
+
+
 
 export default function Footer() {
   return (

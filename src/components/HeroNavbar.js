@@ -12,6 +12,8 @@ import {
   MobileNavMenu,
 } from '../app/components/ui/resizable-navbar'
 import { useState } from "react";
+import Link from 'next/link'
+
 
 export function HeroNavbar({children}) {
   const navItems = [
