@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useId } from "react";
 
 import { motion } from "motion/react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/app/lib/utils";
 
 export function ContainerTextFlip({
   words = ["better", "modern", "beautiful", "awesome"],

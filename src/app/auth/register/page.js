@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { Urls } from '../../../utils/urls'
+import { Urls } from '@/utils/urls'
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/navigation'
 

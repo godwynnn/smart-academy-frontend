@@ -1,10 +1,10 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Urls } from '../../../utils/urls'
-import { handleLogin } from '../../../components/server'
+import { Urls } from '@/utils/urls'
+import { handleLogin } from '@/components/server'
 import { useRouter } from 'next/navigation'
-import { AuthencticationAction } from '../../../reducer/reducer.'
+import { AuthencticationAction } from '@/reducer/reducer.'
 import { ToastContainer, toast } from 'react-toastify';
 
 const url = Urls()

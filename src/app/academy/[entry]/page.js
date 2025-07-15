@@ -2,12 +2,12 @@
 import React, { useRef, useEffect, useState, useCallback, useLayoutEffect, useContext } from 'react'
 import { io } from 'socket.io-client'
 import { w3cwebsocket } from 'websocket';
-import { Urls } from '../../../utils/urls'
+import { Urls } from '@/utils/urls'
 import { useDispatch, useSelector } from 'react-redux';
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { ChatAction } from '../../../reducer/reducer.';
-import { ChatContext } from '../../../components/Chatcontext';
+import { ChatAction } from '@/reducer/reducer.';
+import { ChatContext } from '@/components/Chatcontext';
 import { useParams } from 'next/navigation';
 
 
@@ -195,9 +195,11 @@ export default function Question() {
                         </button>
                         :
 
-                        <div className="animate-spin flex size-6  items-center justify-center border-3 border-current border-t-transparent text-gray-400 rounded-full" role="status" aria-label="loading">
-                            <span className="sr-only">Loading...</span>
-                        </div>
+                        <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-300 text-white hover:bg-gray-400 focus:outline-hidden focus:bg-gray-400 disabled:opacity-50 disabled:pointer-events-none">
+                            <div className="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-gray-100 rounded-full" role="status" aria-label="loading">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </button>
 
                     }
 

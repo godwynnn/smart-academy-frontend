@@ -7,6 +7,7 @@ import { AuthencticationAction } from "../reducer/reducer."
 const urls = Urls()
 export const GetAllQuestions = async (limit, offset, id) => {
     const token =  (await cookies()).get('access_token')?.value  || null
+    console.log('auth ', token)
     const res = await fetch(`${urls.questions}/?limit=${limit}&offset=${offset}&q=${id}`,{
         method: 'GET',
         headers: {

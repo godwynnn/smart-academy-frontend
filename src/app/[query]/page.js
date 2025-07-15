@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import { useLayoutEffect } from 'react'
-import { GetAllQuestions } from '../../components/server'
+import { GetAllQuestions } from '@/components/server'
 import { useInView } from 'react-intersection-observer'
-import { Urls } from '../../utils/urls'
+import { Urls } from '@/utils/urls'
 import Link from 'next/link'
-import DashboardSidebar from '../../components/dashboardSidebar'
-import DashboardHeader from '../../components/DashboardHeader'
-import { handleLogout } from '../../components/server'
+import DashboardSidebar from '@/components/DashboardSidebar'
+import DashboardHeader from '@/components/DashboardHeader'
+import { handleLogout } from '@/components/server'
 import { useDispatch } from 'react-redux'
-import { AuthencticationAction } from '../../reducer/reducer.'
+import { AuthencticationAction } from '@/reducer/reducer.'
 import { useRouter } from 'next/navigation'
 import { useSelector } from 'react-redux'
 
@@ -35,7 +35,6 @@ export default function Query() {
     const fetchData = async () => {
       const res = await GetAllQuestions(5, 0, params.query)
 
-      console.log(res)
       if (res.data == '[]') {
         setData(res.data)
       }else{

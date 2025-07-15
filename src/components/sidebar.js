@@ -22,8 +22,8 @@ export default function Sidebar({ children }) {
     const { fetchRoomName, roomName, SendChatData, startSocketConnection, setRoomName, entry } = useContext(ChatContext)
     const params = useParams()
     const { ref, inView } = useInView()
-    const dispatch=useDispatch()
-    const router=useRouter()
+    const dispatch = useDispatch()
+    const router = useRouter()
 
 
 
@@ -34,15 +34,21 @@ export default function Sidebar({ children }) {
         const fetchData = async () => {
             const res = await GetAllQuestions(10, 0, params.entry)
 
-            const result = []
-            res.data.forEach((val, idx) => {
+            if (res.data == '[]') {
+                setData(res.data)
+            } else {
+                const result = []
+                res.data.forEach((val, idx) => {
 
-                if (val.questions.length > 0) {
-                    result.push(val)
-                }
-            })
+                    if (val.questions.length > 0) {
+                        result.push(val)
+                    }
+                })
 
-            setData(result)
+                setData(result)
+
+
+            }
         }
 
         fetchData()
@@ -80,23 +86,23 @@ export default function Sidebar({ children }) {
 
 
     const Logout = async () => {
-            const res = await handleLogout()
-            console.log(res)
-            if (!!res.logged_out) {
-                toast.success(res.message, {
-                    theme: "light",
-    
-                })
-    
-                dispatch(AuthencticationAction.Logout())
-    
-                router.push('/')
-    
-            }
-    
-    
-    
+        const res = await handleLogout()
+        console.log(res)
+        if (!!res.logged_out) {
+            toast.success(res.message, {
+                theme: "light",
+
+            })
+
+            dispatch(AuthencticationAction.Logout())
+
+            router.push('/')
+
         }
+
+
+
+    }
 
     return (
         <>
@@ -132,7 +138,9 @@ export default function Sidebar({ children }) {
                                     New chat
                                 </a>
                             </li>
-                            {
+                            {data.length == 0 ?
+                                <p className=' text-center text-1xl '>No content</p>
+                                :
                                 data.map((val, idx) => {
                                     return (
 
@@ -152,8 +160,6 @@ export default function Sidebar({ children }) {
 
                                     )
                                 })
-
-
                             }
                             <div ref={ref}>
 

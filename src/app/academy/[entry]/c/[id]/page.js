@@ -2,18 +2,18 @@
 import React, { useState, useEffect, useRef, createContext, useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { ChatReducer } from '../../../../../reducer/reducer.'
-import { ChatAction } from '../../../../../reducer/reducer.'
+import { ChatReducer } from '@/reducer/reducer.'
+import { ChatAction } from '@/reducer/reducer.'
 import { useRouter } from 'next/navigation';
-import Sidebar from '../../../../../components/sidebar'
+import Sidebar from '@/components/sidebar'
 import { useSearchParams } from 'next/navigation'
 import { useParams } from 'next/navigation'
-import { ChatContext } from '../../../../../components/Chatcontext'
-import QuestionComponent from '../../../../../components/question'
-import LessonComponent from '../../../../../components/lesson'
-import {HeroNavbar} from '../../../../../components/HeroNavbar'
-import { Urls } from '../../../../../utils/urls';
-import Navbar from '../../../../../components/Navbar'
+import { ChatContext } from '@/components/Chatcontext'
+import QuestionComponent from '@/components/question'
+import LessonComponent from '@/components/lesson'
+import { HeroNavbar } from '@/components/HeroNavbar'
+import { Urls } from '@/utils/urls';
+import Navbar from '@/components/Navbar'
 
 const url = Urls()
 export default function Chat() {
@@ -25,6 +25,7 @@ export default function Chat() {
   const params = useParams()
   const { fetchRoomName, roomName, SendChatData, startSocketConnection, setRoomName, setEntry } = useContext(ChatContext)
 
+  console.log(params.entry)
 
   const ExportToGoogleForm = (e) => {
     e.preventDefault()
@@ -55,9 +56,9 @@ export default function Chat() {
 
       {/* <!-- Content --> */}
       <div className="relative h-screen w-full lg:ps-64">
-        <Navbar/>
+        <Navbar />
 
-       
+
         <div className="py-10 lg:py-14">
           {/* <!-- Title /--> */}
           <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
@@ -90,9 +91,14 @@ export default function Chat() {
           <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-default">
             <div className="p-1 space-y-0.5">
 
-              <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" onClick={(e) => ExportToGoogleForm(e)} href='#'>
-                Google Form
-              </a>
+              {params.entry === 'question' ?
+                <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" onClick={(e) => ExportToGoogleForm(e)} href='#'>
+                  Google Form
+                </a>
+                :
+                ''
+              }
+
               <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" href="#">
                 As PDF
               </a>

@@ -1,13 +1,13 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import DashboardSidebar from '../../components/dashboardSidebar'
+import DashboardSidebar from '@/components/DashboardSidebar'
 import { useSelector,useDispatch } from 'react-redux'
-import { AuthencticationAction, AuthenticationReducer } from '../../reducer/reducer.'
-import { handleLogout } from '../../components/server'
+import { AuthencticationAction,AuthenticationReducer } from '@/reducer/reducer.'
+import { handleLogout } from '@/components/server'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify';
-import DashboardHeader from '../../components/DashboardHeader'
+import DashboardHeader from '@/components/DashboardHeader'
 
 function Dashboard() {
     const authData = useSelector((state) => state.allReducer.authreducer)
