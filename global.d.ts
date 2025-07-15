@@ -12,6 +12,7 @@ declare global {
 
     // Preline UI
     HSStaticMethods: IStaticMethods;
+    noUiSlider: any; // or the actual type if available
   }
 }
 
