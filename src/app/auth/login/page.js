@@ -6,6 +6,7 @@ import { handleLogin } from '@/components/server'
 import { useRouter } from 'next/navigation'
 import { AuthencticationAction } from '@/reducer/reducer.'
 import { ToastContainer, toast } from 'react-toastify';
+import Link from 'next/link'
 
 const url = Urls()
 export default function Login() {
@@ -68,9 +69,9 @@ export default function Login() {
             <h1 className="block text-2xl font-bold text-gray-800">Sign in</h1>
             <p className="mt-2 text-sm text-gray-600">
               Don't have an account yet?
-              <a className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/auth/register">
+              <Link className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/auth/register">
                 Sign up here
-              </a>
+              </Link>
             </p>
           </div>
 
@@ -109,7 +110,7 @@ export default function Login() {
                 <div>
                   <div className="flex flex-wrap justify-between items-center gap-2">
                     <label htmlFor="password" className="block text-sm mb-2">Password</label>
-                    <a className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../examples/html/recover-account.html">Forgot password?</a>
+                    <Link className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../examples/html/recover-account.html">Forgot password?</Link>
                   </div>
                   <div className="relative">
                     <input type="password" id="password" name="password" onChange={e => { setData({ ...data, 'password': e.target.value }) }} className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="password-error" />
