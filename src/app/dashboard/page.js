@@ -81,7 +81,7 @@ function Dashboard() {
                         {/* Grid */}
                         <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 sm:gap-6">
                             {/* Card */}
-                            <a className="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition" href="/lesson">
+                            <Link className="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition" href="/lesson">
                                 <div className="p-4 md:p-5">
                                     <div className="flex justify-between items-center gap-x-3">
                                         <div className="grow">
@@ -97,11 +97,11 @@ function Dashboard() {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                             {/* End Card */}
 
                             {/* Card */}
-                            <a className="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition" href="/question">
+                            <Link className="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition" href="/question">
                                 <div className="p-4 md:p-5">
                                     <div className="flex justify-between items-center gap-x-3">
                                         <div className="grow">
@@ -117,11 +117,11 @@ function Dashboard() {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                             {/* End Card */}
 
                             {/* Card */}
-                            <a className="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition" href="#">
+                            <Link className="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition" href="#">
                                 <div className="p-4 md:p-5">
                                     <div className="flex justify-between items-center gap-x-3">
                                         <div className="grow">
@@ -137,7 +137,7 @@ function Dashboard() {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                             {/* End Card */}
 
 
@@ -206,12 +206,12 @@ function Dashboard() {
                                         </p>
                                     </div>
                                     <div className="mt-auto flex border-t border-gray-200 divide-x divide-gray-200">
-                                        <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-gray-500 text-gray-100 shadow-2xs hover:bg-gray-300 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                                        <Link className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-gray-500 text-gray-100 shadow-2xs hover:bg-gray-300 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
                                             Coming Soon
-                                        </a>
-                                        {/* <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                                        </Link>
+                                        {/* <Link className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
           View API
-        </a> */}
+        </Link> */}
                                     </div>
                                 </div>)
 

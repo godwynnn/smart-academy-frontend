@@ -49,9 +49,9 @@ export default function Register() {
                         <h1 className="block text-2xl font-bold text-gray-800">Sign up</h1>
                         <p className="mt-2 text-sm text-gray-600">
                             Already have an account?
-                            <a className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../auth/login">
+                            <Link className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../auth/login">
                                 Sign in here
-                            </a>
+                            </Link>
                         </p>
                     </div>
 
@@ -151,7 +151,7 @@ export default function Register() {
                                         <input id="remember-me" name="remember-me" type="checkbox" className="shrink-0 mt-0.5 border-gray-300  border-b-1 outline-0 text-blue-600 focus:ring-blue-500" />
                                     </div>
                                     <div className="ms-3">
-                                        <label htmlFor="remember-me" className="text-sm">I accept the <a className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">Terms and Conditions</a></label>
+                                        <label htmlFor="remember-me" className="text-sm">I accept the <Link className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">Terms and Conditions</Link></label>
                                     </div>
                                 </div>
                                 {/* End Checkbox */}

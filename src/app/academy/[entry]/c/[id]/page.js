@@ -14,6 +14,7 @@ import LessonComponent from '@/components/lesson'
 import { HeroNavbar } from '@/components/HeroNavbar'
 import { Urls } from '@/utils/urls';
 import Navbar from '@/components/Navbar'
+import Link from 'next/link'
 
 const url = Urls()
 export default function Chat() {
@@ -92,19 +93,19 @@ export default function Chat() {
             <div className="p-1 space-y-0.5">
 
               {params.entry === 'question' ?
-                <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" onClick={(e) => ExportToGoogleForm(e)} href='#'>
+                <Link className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" onClick={(e) => ExportToGoogleForm(e)} href='#'>
                   Google Form
-                </a>
+                </Link>
                 :
                 ''
               }
 
-              <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" href="#">
+              <Link className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" href="#">
                 As PDF
-              </a>
-              <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" href="#">
+              </Link>
+              <Link className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100" href="#">
                 Team Account
-              </a>
+              </Link>
 
 
             </div>

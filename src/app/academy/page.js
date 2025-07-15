@@ -8,6 +8,7 @@ import { handleLogout } from '@/components/server'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify';
 import DashboardHeader from '@/components/DashboardHeader'
+import Link from 'next/link'
 
 function Dashboard() {
     const authData = useSelector((state) => state.allReducer.authreducer)
@@ -112,12 +113,12 @@ function Dashboard() {
                                 </p>
                             </div>
                             <div className="mt-auto flex border-t border-gray-200 divide-x divide-gray-200">
-                                <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-gray-500 text-gray-100 shadow-2xs hover:bg-gray-600 focus:outline-hidden focus:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none" href={val.path}>
+                                <Link className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-gray-500 text-gray-100 shadow-2xs hover:bg-gray-600 focus:outline-hidden focus:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none" href={val.path}>
                                     Generate
-                                </a>
-                                {/* <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                                </Link>
+                                {/* <Link className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
                       View API
-                    </a> */}
+                    </Link> */}
                             </div>
                         </div>)
 

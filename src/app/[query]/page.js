@@ -31,7 +31,7 @@ export default function Query() {
 
 
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       const res = await GetAllQuestions(5, 0, params.query)
 

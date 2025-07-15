@@ -206,33 +206,33 @@ export default function Home() {
             <div className="grid sm:grid-cols-12 gap-6">
               <div className="sm:self-end col-span-12 sm:col-span-7 md:col-span-8 lg:col-span-5 lg:col-start-3">
                 {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                <Link className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
                   <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                     <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
                       src="https://tinyurl.com/25xbcpr8" alt="Masonry Cards Image" />
                   </div>
                   
-                </a>
+                </Link>
                 {/* End Card */}
               </div>
               {/* End Col */}
 
               <div className="sm:self-end col-span-12 sm:col-span-5 md:col-span-4 lg:col-span-3 max-sm:hidden sm:hidden md:block">
                 {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                <Link className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
                   <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                     <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
                       src="https://tinyurl.com/ev69rn66" alt="Masonry Cards Image" />
                   </div>
                   
-                </a>
+                </Link>
                 {/* End Card */}
               </div>
               {/* End Col */}
 
              <div className="col-span-12 sm:col-span-6 md:col-span-4">
                 {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                <Link className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
                   <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                     <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
                       src="https://tinyurl.com/muyajp7d" alt="Masonry Cards Image" />
@@ -241,14 +241,14 @@ export default function Home() {
                   
 
                   
-                </a>
+                </Link>
                 {/* End Card */}
               </div>
               {/* End Col */}
 
               <div className="col-span-12 sm:col-span-6 md:col-span-4 max-sm:hidden sm:hidden md:block">
                 {/* Card */}
-                <a className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
+                <Link className="group relative block rounded-xl overflow-hidden focus:outline-hidden" href="#">
                   <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                     <img className="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
                       src="https://tinyurl.com/4nrd5dac" alt="Masonry Cards Image" />
@@ -256,7 +256,7 @@ export default function Home() {
                  
 
 
-                </a>
+                </Link>
                 {/* End Card */}
               </div>
               {/* End Col */}

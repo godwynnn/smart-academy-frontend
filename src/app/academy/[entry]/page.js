@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { ChatAction } from '@/reducer/reducer.';
 import { ChatContext } from '@/components/Chatcontext';
 import { useParams } from 'next/navigation';
-
+import Link from 'next/link';
 
 
 
@@ -89,9 +89,9 @@ export default function Question() {
                 <div className="-mt-20 max-w-4xl w-full text-center mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mb-4 flex justify-center items-center">
 
-                        <a className="flex-none rounded-md text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../templates.html" aria-label="Preline">
+                        <Link className="flex-none rounded-md text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../templates.html" aria-label="Preline">
                             LOGO
-                        </a>
+                        </Link>
 
                         <div className="ms-2">
 

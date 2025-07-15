@@ -1,7 +1,4 @@
- useGSAP(() => {
-    const marquees = gsap.utils.toArray(".marquee_item");
 
-    horizontalLoop(marquees, { paused: false, repeat: -1, delay:0, speed:2});
 
 
     /*
@@ -75,5 +72,3 @@ Features:
       }
       return tl;
     }
-
-  })
