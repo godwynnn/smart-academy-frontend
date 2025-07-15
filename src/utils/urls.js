@@ -8,6 +8,7 @@ export const Urls=()=>{
         export_to_form:`${url}export/form`,
         login:`${url}auth/login/`,
         register:`${url}auth/register/`,
+        logout:`${url}auth/logout/`
         
 
 

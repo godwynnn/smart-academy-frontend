@@ -60,10 +60,10 @@ export const AuthenticationSlice = createSlice({
 
     reducers: {
         Login: (state, action) => {
-            // console.log('dispatch values', action.payload)
+            console.log('dispatch values', action.payload)
             state.logged_in = true
             state.email = action.payload.data.email
-            state.accessToken = action.payload.data.token
+            state.accessToken = action.payload.token
             // state.date_exp = action.payload.expiry
             state.first_name = action.payload.data.first_name
             state.last_name = action.payload.data.last_name

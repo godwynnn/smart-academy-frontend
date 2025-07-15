@@ -5,6 +5,7 @@ import { Urls } from '../../../utils/urls'
 import { handleLogin } from '../../../components/server'
 import { useRouter } from 'next/navigation'
 import { AuthencticationAction } from '../../../reducer/reducer.'
+import { ToastContainer, toast } from 'react-toastify';
 
 const url = Urls()
 export default function Login() {
@@ -17,10 +18,19 @@ export default function Login() {
   const sendLoginData = async (e) => {
     e.preventDefault();
     setLoading(true)
-    const  response  = await handleLogin(data)
+    const response = await handleLogin(data)
+
+
+
+
+
     
-    
-    if (response.status === 200) {
+
+    if (response.logged_in === true) {
+      toast.success(response.message, {
+      theme: "light",
+      
+    })
       dispatch(AuthencticationAction.Login({
         ...authData,
         'token': response.token,
@@ -31,7 +41,11 @@ export default function Login() {
       setLoading(false)
 
       router.push('/dashboard')
-    }else{
+    } else {
+      toast.warn(response.message, {
+      theme: "light",
+      
+    })
       setLoading(false)
       console.log('faled')
     }
@@ -42,7 +56,7 @@ export default function Login() {
   }
 
 
- 
+
 
 
 

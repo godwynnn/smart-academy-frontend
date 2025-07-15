@@ -16,17 +16,26 @@ export const ChatProvider=({children})=>{
     const [entry,setEntry]=useState('')
     const dispatch=useDispatch()
     const chatData=useSelector((state)=>state.allReducer.chatreducer)
+    const authData = useSelector((state) => state.allReducer.authreducer)
     const ws = useRef(null)
     const router=useRouter()
     const params=useParams()
-
-
     
-    const fetchRoomName=()=>{
-         fetch(url.entry).then(res => {
+
+    console.log(authData)
+    
+    const fetchRoomName= ()=>{
+
+         fetch(url.entry,{
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authData.accessToken.access}`,
+        },
+         }).then(res => {
                     if (res.status === 200) {
                         return res.json()
                     } else {
+                        console.log(res)
                         throw new Error(`HTTP error! status: ${res.status}`);
                     }
         
@@ -54,7 +63,7 @@ export const ChatProvider=({children})=>{
         ws.current.send(
             JSON.stringify({
                 'message': chatData,
-                'username': 'a@gmail.com',
+                'username': 'a',
                 'generate_id': roomName.room_name,
                 'prompt_type':prompt_type
             })
@@ -69,7 +78,7 @@ export const ChatProvider=({children})=>{
 
     useLayoutEffect(()=>{
         if (roomName?.room_name) {
-            ws.current = new w3cwebsocket(`${url.ws_url}${roomName.room_name}/`)
+            ws.current = new w3cwebsocket(`${url.ws_url}${roomName.room_name}/?token=${authData.accessToken.access}`)
 
             ws.current.onopen = () => {
                 console.log('open')
@@ -81,11 +90,11 @@ export const ChatProvider=({children})=>{
                 if(message.sent_by === 'user'){
                         
                     if (message.type === 'chat_message') {
-                        dispatch(ChatAction.SetQuestionData({ ...chatData, 'relayed': true,'data':message,'from_ws':true }))
+                        dispatch(ChatAction.SetQuestionData({ ...chatData, 'relayed': true,'data':message,'from_ws':true,'loading': false,  }))
                         router.push(`${params.entry}/c/${roomName.room_name}`)
                     }
                     if (message.type ==='chat_history'){
-                        dispatch(ChatAction.SetQuestionData({'relayed': true,'data':message,'from_ws':true }))
+                        dispatch(ChatAction.SetQuestionData({'relayed': true,'data':message,'from_ws':true,'loading': false,  }))
 
                     }
                     

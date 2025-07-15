@@ -94,7 +94,7 @@ function QuestionComponent({chatData}) {
 
                     </li>
                     :
-                    <p>loading</p>
+                  <p>loading</p>
 
               )
               :

@@ -1,10 +1,46 @@
 "use client"
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Urls } from '../../../utils/urls'
+import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/navigation'
 
-const url=Urls()
+const url = Urls()
 
 export default function Register() {
+    const [data, setData] = useState({})
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        const res = await fetch(url.register, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        const responseData = await res.json()
+        if (!res.ok) {
+            toast.error(responseData.message, {
+                theme: "light",
+
+            })
+            setLoading(false)
+        }
+
+        toast.success(responseData.message, {
+            theme: "light",
+
+        })
+        setLoading(false)
+        router.push('/auth/login')
+
+
+
+
+    }
     return (
         <div className='flex min-h-[100vh] justify-center items-center bg-[#001219]'>
             <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-2xs lg:w-[30%] md:w-[40%] sm:w-[50%] max-sm:w-[80%]">
@@ -33,13 +69,42 @@ export default function Register() {
                         <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6">Or</div>
 
                         {/* Form */}
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="grid gap-y-4">
+                                {/* Form Group */}
+                                <div>
+                                    <label htmlFor="first_name" className="block text-sm mb-2">First Name</label>
+                                    <div className="relative">
+                                        <input onChange={e => setData(prev => ({ ...prev, 'first_name': e.target.value }))} type="text" id="first_name" name="first_name" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="email-error" />
+                                        <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
+                                            <svg className="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* End Form Group */}
+
+
+                                {/* Form Group */}
+                                <div>
+                                    <label htmlFor="last_name" className="block text-sm mb-2">Other Name</label>
+                                    <div className="relative">
+                                        <input onChange={e => setData(prev => ({ ...prev, 'last_name': e.target.value }))} type="text" id="last_name" name="last_name" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="email-error" />
+                                        <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
+                                            <svg className="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* End Form Group */}
+
                                 {/* Form Group */}
                                 <div>
                                     <label htmlFor="email" className="block text-sm mb-2">Email address</label>
                                     <div className="relative">
-                                        <input type="email" id="email" name="email" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="email-error" />
+                                        <input onChange={e => setData(prev => ({ ...prev, 'email': e.target.value }))} type="email" id="email" name="email" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="email-error" />
                                         <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                                             <svg className="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
                                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
@@ -54,7 +119,7 @@ export default function Register() {
                                 <div>
                                     <label htmlFor="password" className="block text-sm mb-2">Password</label>
                                     <div className="relative">
-                                        <input type="password" id="password" name="password" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="password-error" />
+                                        <input onChange={e => setData(prev => ({ ...prev, 'password': e.target.value }))} type="password" id="password" name="password" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="password-error" />
                                         <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                                             <svg className="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
                                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
@@ -69,7 +134,7 @@ export default function Register() {
                                 <div>
                                     <label htmlFor="confirm-password" className="block text-sm mb-2">Confirm Password</label>
                                     <div className="relative">
-                                        <input type="password" id="confirm-password" name="confirm-password" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="confirm-password-error" />
+                                        <input onChange={e => setData(prev => ({ ...prev, 'confirm_password': e.target.value }))} type="password" id="confirm-password" name="confirm_password" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="confirm-password-error" />
                                         <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                                             <svg className="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
                                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
@@ -91,7 +156,19 @@ export default function Register() {
                                 </div>
                                 {/* End Checkbox */}
 
-                                <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Sign up</button>
+                                {loading ?
+                                    <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-300 text-white hover:bg-gray-400 focus:outline-hidden focus:bg-gray-400 disabled:opacity-50 disabled:pointer-events-none">
+                                        <div className="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-gray-100 rounded-full" role="status" aria-label="loading">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                    :
+                                    <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                        Sign in
+                                    </button>
+
+                                }
+
                             </div>
                         </form>
                         {/* End Form */}
