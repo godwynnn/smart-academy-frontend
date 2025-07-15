@@ -161,7 +161,7 @@ export const MobileNavMenu = ({
   onClose
 }) => {
   return (
-    <LinknimatePresence>
+    <AnimatePresence>
       {isOpen && (
         <motion.div
           initial={{ opacity: 0 }}
