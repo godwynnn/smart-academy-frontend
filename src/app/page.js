@@ -14,6 +14,7 @@ import { useEffect, useRef } from "react";
 import Footer from '../components/Footer'
 import { ContainerTextFlipDemo } from '../components/ContainerTextFlipDemo'
 import { horizontalLoop } from '../components/HorizontalLoop'
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
