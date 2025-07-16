@@ -69,7 +69,7 @@ export function HeroNavbar({children}) {
               <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full">
+                className="w-full" href={"/auth/login"}>
                 Login
               </NavbarButton>
               <NavbarButton
