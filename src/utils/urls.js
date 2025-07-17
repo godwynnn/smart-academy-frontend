@@ -1,8 +1,9 @@
 export const Urls=()=>{
-    const url='http://127.0.0.1:8000/'
+    // const url='http://127.0.0.1:8000/'
+    const url='https://smart-academy-ujq0.onrender.com/'
 
     return{
-        ws_url:'ws://127.0.0.1:8000/ws/chat/',
+        ws_url:'ws://smart-academy-ujq0.onrender.com/ws/chat/',
         entry:`${url}entry/`,
         questions:`${url}questions`,
         export_to_form:`${url}export/form`,

@@ -83,7 +83,7 @@ export function TimelineDemo() {
     },
   ];
   return (
-    <div className="relative w-full overflow-clip py-20 bg-transparent">
+    <div className="relative w-full overflow-clip py-20 md:bg-transparent sm:bg-transparent max-sm:bg-transparent">
       <Timeline data={data} />
     </div>
   );
