@@ -111,7 +111,7 @@ export default function Question() {
                     <div className="relative">
                         <input type="text"
                             required
-                            // value={chatData.subject}
+                            value={chatData.subject ||""}
                             onChange={e => dispatch(ChatAction.SetQuestionData({ ...chatData, 'subject': e.target.value }))}
                             className="p-3 sm:p-4 block w-full border-gray-200 border-1 rounded-full sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Topic or Subject" />
 
@@ -131,7 +131,7 @@ export default function Question() {
                         <div className="w-full h-[30%] flex justify-between items-center mt-5 border-1 border-gray-200 rounded-full  relative">
                             <input placeholder='Number of questions'
                                 required
-                                // value={chatData.no_questions}
+                                value={chatData.no_questions ||""}
                                 onChange={e => dispatch(ChatAction.SetQuestionData({ ...chatData, 'no_questions': e.target.value }))}
                                 className="w-full p-0 h-full bg-transparent rounded-full px-3 text-gray-800 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white" type="number" aria-roledescription="Number field" data-hs-input-number-input="" />
                             <div className="flex justify-end items-center gap-x-1.5 absolute top-1/2 end-2 -translate-y-1/2">
@@ -157,6 +157,7 @@ export default function Question() {
 
                         <select
                             onChange={e => dispatch(ChatAction.SetQuestionData({ ...chatData, 'class': e.target.value }))}
+                            value={chatData.class}
                             data-hs-select='{
                         "placeholder": "Select Class...",
                         "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",

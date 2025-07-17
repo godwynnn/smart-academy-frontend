@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const chatState={
-    subject:null,
+    subject:"",
     no_questions:1,
-    class:null,
+    class:"",
     loading:false,
     relayed:null,
     prompt_type:'question',
