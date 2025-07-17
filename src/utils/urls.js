@@ -3,7 +3,7 @@ export const Urls=()=>{
     const url='https://smart-academy-ujq0.onrender.com/'
 
     return{
-        ws_url:'ws://smart-academy-ujq0.onrender.com/ws/chat/',
+        ws_url:'wss://smart-academy-ujq0.onrender.com/ws/chat/',
         entry:`${url}entry/`,
         questions:`${url}questions`,
         export_to_form:`${url}export/form`,
