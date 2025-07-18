@@ -21,6 +21,7 @@ export default function Chat() {
 
   const dispatch = useDispatch()
   const chatData = useSelector((state) => state.chatreducer)
+  const authData = useSelector((state) => state.authreducer)
   const ws = useRef(null)
   const router = useRouter()
   const params = useParams()
@@ -30,7 +31,13 @@ export default function Chat() {
 
   const ExportToGoogleForm = (e) => {
     e.preventDefault()
-    fetch(`${url.export_to_form}/${params.id}/`)
+    fetch(`${url.export_to_form}/${params.id}/`,{
+      headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authData.accessToken.access}`,
+            },
+
+    })
       .then((res) => { return res.json() })
       .then(data => {
 

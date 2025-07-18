@@ -98,10 +98,10 @@ export default function Question() {
                         </div>
                     </div>
 
-                    <h1 className="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
+                    <h1 className="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-gray-800">
                         Welcome to Smart Academy
                     </h1>
-                    <p className="mt-3 text-gray-600 dark:text-neutral-400">
+                    <p className="mt-3 text-gray-800 dark:text-gray-800">
                         Get Smart, all about Education
                     </p>
                 </div>
@@ -113,7 +113,7 @@ export default function Question() {
                             required
                             value={chatData.subject ||""}
                             onChange={e => dispatch(ChatAction.SetQuestionData({ ...chatData, 'subject': e.target.value }))}
-                            className="p-3 sm:p-4 block w-full border-gray-200 border-1 rounded-full sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Topic or Subject" />
+                            className="p-3 sm:p-4 block w-full border-gray-200 border-1 rounded-full sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-200 dark:border-neutral-700 dark:text-neutral-600 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Topic or Subject" />
 
 
                         <div className="absolute top-1/2 end-2 -translate-y-1/2">
@@ -188,7 +188,7 @@ export default function Question() {
 
 
                     {!chatData.loading ?
-                        <button type="submit" className="py-3 px-4  flex  mt-2 w-full text-center items-center justify-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-hidden focus:bg-gray-900 disabled:opacity-50  dark:bg-white dark:text-neutral-800">
+                        <button type="submit" className="py-3 px-4  flex  mt-2 w-full text-center items-center justify-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-hidden focus:bg-gray-900 disabled:opacity-50  dark:bg-gray-800 dark:text-neutral-200">
                             Send
 
                             <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
