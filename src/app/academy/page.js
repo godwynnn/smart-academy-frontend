@@ -11,7 +11,7 @@ import DashboardHeader from '@/components/DashboardHeader'
 import Link from 'next/link'
 
 function Dashboard() {
-    const authData = useSelector((state) => state.allReducer.authreducer)
+    const authData = useSelector((state) => state.authreducer)
     const dispatch = useDispatch()
     const router = useRouter()
 

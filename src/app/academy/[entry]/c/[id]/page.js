@@ -20,7 +20,7 @@ const url = Urls()
 export default function Chat() {
 
   const dispatch = useDispatch()
-  const chatData = useSelector((state) => state.allReducer.chatreducer)
+  const chatData = useSelector((state) => state.chatreducer)
   const ws = useRef(null)
   const router = useRouter()
   const params = useParams()

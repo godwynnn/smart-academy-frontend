@@ -22,7 +22,7 @@ export default function Question() {
     const params = useParams()
 
 
-    const chatData = useSelector((state) => state.allReducer.chatreducer)
+    const chatData = useSelector((state) => state.chatreducer)
     const dispatch = useDispatch()
     const prompt_type = params.entry
     const { fetchRoomName, roomName, SendChatData, startSocketConnection, setEntry } = useContext(ChatContext)

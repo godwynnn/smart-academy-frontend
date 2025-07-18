@@ -16,15 +16,18 @@ export const ChatSlice=createSlice({
     initialState:chatState,
     reducers:{
         SetQuestionData:(state,action)=>{
-            console.log(action)
+            console.log(action.payload.data)
             state.subject=action.payload.subject
             state.no_questions=action.payload.no_questions
             state.class=action.payload.class
             state.loading=action.payload.loading
             state.relayed=action.payload.relayed
             state.prompt_type=action.payload.prompt_type
+            
             if (action.payload.from_ws === true){
+                console.log('before ',state.data)
                 state.data=[action.payload.data]
+                console.log('after ',state.data)
             }
             
         }
@@ -38,19 +41,14 @@ export const { actions: ChatAction, reducer: ChatReducer } = ChatSlice
 
 const State = {
     accessToken: null,
-    date_exp: null,
     logged_in: false,
     email: '',
     is_admin: false,
     is_superuser:false,
     email: '',
     first_name: '',
-    curr_package: null,
-    is_subscribed: false,
     last_name: '',
     id: null,
-
-    subscription_type: null
 
 }
 

@@ -10,18 +10,22 @@ import { combineReducers } from "@reduxjs/toolkit";
 const persistConfig = {
     key: 'root',
     storage,
+
+    
   }
-const persistedReducer = persistReducer(persistConfig, AuthenticationReducer)
 
   const allReducer=combineReducers({
-    authreducer:persistedReducer,
+    authreducer:AuthenticationReducer,
     chatreducer:ChatReducer
     
 })
 
+const persistedReducer = persistReducer(persistConfig, allReducer)
+
+  
 
 export const store=configureStore({
-    reducer:{allReducer},
+    reducer:persistedReducer,
     middleware: (getDefaultMiddleware) => [thunk],
 })
 

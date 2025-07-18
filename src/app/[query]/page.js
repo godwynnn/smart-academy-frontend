@@ -25,7 +25,7 @@ export default function Query() {
   const [offset, setOffset] = useState(Entries)
   const dispatch = useDispatch()
   const router = useRouter()
-  const authData = useSelector((state) => state.allReducer.authreducer)
+  const authData = useSelector((state) => state.authreducer)
 
 
 

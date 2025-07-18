@@ -1,6 +1,6 @@
 import React from 'react'
 import Markdown from 'react-markdown'
-export default function LessonCompnent({chatData}) {
+export default function LessonComponent({chatData}) {
   return (
     <>
     {chatData.data.map((val, idx) => {
@@ -35,31 +35,23 @@ export default function LessonCompnent({chatData}) {
 
                       <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3" >
                         {/* <!-- Card --> */}
-                        {val.message.quiz.map((val, idx) => {
-                          return (<div className="space-y-3" key={idx}>
-                            <p className="text-1xl  text-gray-800 dark:text-white">
-                              {val.question}
-                            </p>
-
-                            {val.options.map((option, idx) => {
-                              return (<p className="text-sm text-gray-800 dark:text-white" key={idx}>
-                                {option}
-                              </p>)
-                            })}
-
-                            <p className="text-sm font-bold text-gray-800 dark:text-white">
-                              Answer: {val.answer}
-                            </p>
-
-                          </div>)
-
-                        })
+                      
+                          <div className="space-y-3" key={idx}>
+                              <Markdown>{val.message}</Markdown>
+                          </div> 
+                       
+                    
 
 
-                        }
+
+
+
+
                         {/* <!-- End Card --> */}
 
                         {/* <!-- Button Group --> */}
+
+
                         <div>
                           <div className="sm:flex sm:justify-between">
                             <div>
@@ -97,10 +89,13 @@ export default function LessonCompnent({chatData}) {
                     <p>loading</p>
 
               )
+
               :
 
-              (val.messages.map((val, idx) => {
 
+              
+              (val.messages.map((val, idx) => {
+                
                 return (
                   <li className="py-2 sm:py-4" key={idx}>
                     <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto">
