@@ -56,12 +56,12 @@ export const ChatProvider = ({ children }) => {
         // console.log(prompt_type, roomName)
 
         e.preventDefault()
-        dispatch(ChatAction.SetQuestionData({
-            ...chatData,
-            'loading': true,
-            'relayed': false,
-            'prompt_type': prompt_type
-        }))
+        // dispatch(ChatAction.SetQuestionData({
+        //     ...chatData,
+        //     'loading': true,
+        //     'relayed': false,
+        //     'prompt_type': prompt_type
+        // }))
         ws.current.send(
             JSON.stringify({
                 'message': chatData,
@@ -86,12 +86,12 @@ export const ChatProvider = ({ children }) => {
                 console.log('open')
             }
             ws.current.onmessage = (event) => {
-            
+
                 const message = JSON.parse(event.data)
                 console.log('Chat message ', message)
 
-                if (message.sent_by === 'user') {
-                    if (message.type === 'chat_message') {
+                if (message.type == 'chat_message') {
+                    if (message.sent_by == 'user') {
                         console.log('ok')
 
                         dispatch(ChatAction.SetQuestionData({ 'relayed': false, 'data': message, 'from_ws': true, 'loading': false, }))
@@ -99,8 +99,8 @@ export const ChatProvider = ({ children }) => {
 
                     }
 
-
-                    if (message.type === 'chat_history') {
+                    else {
+                        console.log('before ', chatData)
                         dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
 
                     }
@@ -108,7 +108,6 @@ export const ChatProvider = ({ children }) => {
 
                 }
                 else {
-                     console.log('before ',chatData)
                     dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
 
                 }
@@ -117,7 +116,7 @@ export const ChatProvider = ({ children }) => {
 
             }
         }
-    }, [roomName?.room_name])
+    }, [roomName])
     // console.log(roomName)
 
 

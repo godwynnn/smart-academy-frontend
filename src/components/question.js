@@ -17,7 +17,7 @@ function QuestionComponent({chatData}) {
                         </span>
 
                         <div className="grow mt-2 space-y-3">
-                          <p className="text-gray-800 dark:text-neutral-200 text-2xl font-bold">
+                          <p className="text-gray-800 dark:text-neutral-800 text-2xl font-bold">
                             {val.message}
                           </p>
                         </div>
@@ -37,17 +37,17 @@ function QuestionComponent({chatData}) {
                         {/* <!-- Card --> */}
                         {val.message.quiz.map((val, idx) => {
                           return (<div className="space-y-3" key={idx}>
-                            <p className="text-1xl  text-gray-800 dark:text-white">
+                            <p className="text-1xl  text-gray-800 dark:text-neutral-800">
                               {val.question}
                             </p>
 
                             {val.options.map((option, idx) => {
-                              return (<p className="text-sm text-gray-800 dark:text-white" key={idx}>
+                              return (<p className="text-sm text-gray-800 dark:text-neutral-800" key={idx}>
                                 {option}
                               </p>)
                             })}
 
-                            <p className="text-sm font-bold text-gray-800 dark:text-white">
+                            <p className="text-sm font-bold text-gray-800 dark:text-neutral-800">
                               Answer: {val.answer}
                             </p>
 
@@ -110,7 +110,7 @@ function QuestionComponent({chatData}) {
                         </span>
 
                         <div className="grow mt-2 space-y-3">
-                          <p className="text-gray-800 dark:text-neutral-200 text-2xl font-semibold">
+                          <p className="text-gray-800 dark:text-neutral-800 text-2xl font-semibold">
                             {val.question}
                           </p>
                         </div>
@@ -127,17 +127,17 @@ function QuestionComponent({chatData}) {
                         {val.answer != null?
                           val.answer.quiz.map((val, idx) => {
                           return (<div className="space-y-3" key={idx}>
-                            <p className="text-1xl  text-gray-800 dark:text-white">
+                            <p className="text-1xl  text-gray-800 dark:text-neutral-800">
                               {val.question}
                             </p>
 
                             {val.options.map((option, idx) => {
-                              return (<p className="text-sm text-gray-800 dark:text-white" key={idx}>
+                              return (<p className="text-sm text-gray-800 dark:text-neutral-800" key={idx}>
                                 {option}
                               </p>)
                             })}
 
-                            <p className="text-sm font-bold text-gray-800 dark:text-white">
+                            <p className="text-sm font-bold text-gray-800 dark:text-neutral-800">
                               Answer: {val.answer}
                             </p>
 

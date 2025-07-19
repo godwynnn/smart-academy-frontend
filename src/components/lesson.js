@@ -17,7 +17,7 @@ export default function LessonComponent({chatData}) {
                         </span>
 
                         <div className="grow mt-2 space-y-3">
-                          <p className="text-gray-800 dark:text-neutral-200 text-2xl font-bold">
+                          <p className="text-gray-800 dark:text-neutral-800 text-2xl font-bold">
                             {val.message}
                           </p>
                         </div>
@@ -105,7 +105,7 @@ export default function LessonComponent({chatData}) {
                         </span>
 
                         <div className="grow mt-2 space-y-3">
-                          <p className="text-gray-800 dark:text-neutral-200 text-2xl font-semibold">
+                          <p className="text-gray-800 dark:text-neutral-800 text-2xl font-semibold">
                             {val.question}
                           </p>
                         </div>
@@ -120,8 +120,8 @@ export default function LessonComponent({chatData}) {
 
                         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3" >
                         {val.answer != null?
-                          <div className="space-y-3" key={idx}>
-                              <Markdown>{val.answer}</Markdown>
+                          <div className="space-y-3 text-gray-800 dark:text-neutral-800" key={idx}>
+                              <Markdown >{val.answer}</Markdown>
                           </div> 
                         :
                         <p>loading...</p>

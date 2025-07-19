@@ -119,7 +119,7 @@ export default function Sidebar({ children }) {
                 <nav className="size-full flex flex-col">
                     <div className="flex items-center pt-4 pe-4 ps-7">
                         {/* <!-- Logo --> */}
-                        <Link className="flex-none focus:outline-hidden focus:opacity-80" href="../templates.html" aria-label="Preline">
+                        <Link className="flex-none focus:outline-hidden focus:opacity-80" href="/dashboard" aria-label="Preline">
                             LOGO
                         </Link>
                         {/* <!-- End Logo --> */}
