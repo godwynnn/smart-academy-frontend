@@ -93,7 +93,7 @@ export default function LessonComponent({chatData}) {
               :
 
 
-              
+
               (val.messages.map((val, idx) => {
                 
                 return (
