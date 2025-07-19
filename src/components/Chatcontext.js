@@ -88,29 +88,36 @@ export const ChatProvider = ({ children }) => {
             ws.current.onmessage = (event) => {
 
                 const message = JSON.parse(event.data)
-                console.log('Chat message ', message)
+                
 
-                if (message.type == 'chat_message') {
-                    if (message.sent_by == 'user') {
-                        console.log('ok')
 
+                if (message.sent_by == 'user') {
+
+                    console.log('ok')
+
+                    if (message.type === 'chat_message') {
                         dispatch(ChatAction.SetQuestionData({ 'relayed': false, 'data': message, 'from_ws': true, 'loading': false, }))
                         router.push(`${params.entry}/c/${roomName.room_name}`)
-
                     }
 
-                    else {
-                        console.log('before ', chatData)
+
+
+
+                    if (message.type === 'chat_history') {
                         dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
 
                     }
 
-
                 }
+
                 else {
+                    console.log('before ', chatData)
                     dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
 
                 }
+
+
+
 
 
 

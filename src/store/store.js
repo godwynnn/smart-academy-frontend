@@ -14,18 +14,20 @@ const persistConfig = {
     
   }
 
+  const persistedReducer = persistReducer(persistConfig, AuthenticationReducer)
+
   const allReducer=combineReducers({
-    authreducer:AuthenticationReducer,
+    authreducer:persistedReducer,
     chatreducer:ChatReducer
     
 })
 
-const persistedReducer = persistReducer(persistConfig, allReducer)
+
 
   
 
 export const store=configureStore({
-    reducer:persistedReducer,
+    reducer:allReducer,
     middleware: (getDefaultMiddleware) => [thunk],
 })
 
