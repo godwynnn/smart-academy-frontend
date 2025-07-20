@@ -200,6 +200,7 @@ function Dashboard() {
                                 series={ChartData.series}
                                 type="bar"
                                 width="100%"
+                                height={600}
                             />
 
                         </div>
