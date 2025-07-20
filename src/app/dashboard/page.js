@@ -2,34 +2,53 @@
 import React from 'react'
 import Image from 'next/image'
 import DashboardSidebar from '@/components/DashboardSidebar'
-import { useSelector,useDispatch } from 'react-redux'
-import { AuthencticationAction,AuthenticationReducer } from '@/reducer/reducer.'
+import { useSelector, useDispatch } from 'react-redux'
+import { AuthencticationAction, AuthenticationReducer } from '@/reducer/reducer.'
 import { handleLogout } from '@/components/server'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify';
 import DashboardHeader from '@/components/DashboardHeader'
 import Link from 'next/link'
+import Chart from 'react-apexcharts'
 
 function Dashboard() {
     const authData = useSelector((state) => state.authreducer)
-    const dispatch=useDispatch()
-    const router=useRouter()
+    const dispatch = useDispatch()
+    const router = useRouter()
 
-    const Logout= async()=>{
-        const res=await handleLogout()
+    const ChartData = {
+        options: {
+            chart: {
+                id: "basic-bar"
+            },
+            xaxis: {
+                categories: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+            }
+        },
+        series: [
+            {
+                name: "series-1",
+                data: [30, 40, 45, 50, 49, 60, 70, 91]
+            }
+        ]
+    };
+
+
+    const Logout = async () => {
+        const res = await handleLogout()
         console.log(res)
-        if (!!res.logged_out){
+        if (!!res.logged_out) {
             toast.success(res.message, {
-                  theme: "light",
-                  
-                })
-            
+                theme: "light",
+
+            })
+
             dispatch(AuthencticationAction.Logout())
-            
+
             router.push('/')
 
         }
-        
+
 
 
     }
@@ -63,9 +82,9 @@ function Dashboard() {
 
     return (
         <>
-            
 
-        <DashboardHeader  Logout={Logout}  authData={authData}/>
+
+            <DashboardHeader Logout={Logout} authData={authData} />
 
 
             <DashboardSidebar />
@@ -174,7 +193,16 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div id="hs-single-area-chart"></div>
+                        <div id="hs-single-area-chart">
+
+                            <Chart
+                                options={ChartData.options}
+                                series={ChartData.series}
+                                type="bar"
+                                width="100%"
+                            />
+
+                        </div>
                     </div>
                     {/* End Card */}
 
