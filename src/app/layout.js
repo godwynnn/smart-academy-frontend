@@ -6,13 +6,16 @@ import { store } from "../store/store";
 import { ChatProvider } from '../components/Chatcontext'
 import Persist from "./persist";
 import { Bounce, ToastContainer } from "react-toastify";
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_KEY}>
+
+        
         <Provider store={store}>
           <Persist>
             <ChatProvider>
@@ -33,6 +36,8 @@ export default function RootLayout({ children }) {
             </ChatProvider>
           </Persist>
         </Provider>
+
+        </GoogleOAuthProvider>
       </body>
 
       <PrelineScriptWrapper />

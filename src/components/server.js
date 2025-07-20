@@ -100,3 +100,38 @@ export const handleLogout=async ()=>{
 
 
 }
+
+
+
+export  const handleSocialLogin=async (res)=>{
+    const response = await fetch(urls.google, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'access_token':res.access_token})
+        });
+    
+        const responseData = await response.json();
+        if (!response.ok) {
+    
+          
+            return responseData
+    
+        } else {
+    
+            if (response.status == 200) {
+    
+                (await cookies()).set('access_token', responseData.token.access, {
+                    httpOnly: true,
+                    secure: true,
+                    path: '/',
+                    maxAge: 30*30
+                })
+                return responseData
+    
+            }
+    
+    
+        }
+  }
