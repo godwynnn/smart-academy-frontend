@@ -13,6 +13,5 @@ export const Urls=()=>{
         google:`${url}auth/verify/social/google-oauth2/`
         
 
-
     }
 }
