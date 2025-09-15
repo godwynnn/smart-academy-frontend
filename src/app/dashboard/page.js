@@ -174,7 +174,7 @@ function Dashboard() {
                             </button>
                         </div>
 
-                    {!Loading?
+                    {Loading === false?
 
                      (
                             [false,undefined].includes(scheduleResponse.scheduled)?  
@@ -281,7 +281,7 @@ function Dashboard() {
 
                         </div>
                             :
-                            <div className="p-4 overflow-y-auto">
+                            <div className="p-4 overflow-y-auto text-black">
                                 <p>Link</p>
                                 <p>{scheduleResponse.link}</p>
                             </div>
