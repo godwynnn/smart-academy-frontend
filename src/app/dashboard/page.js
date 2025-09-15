@@ -66,7 +66,7 @@ function Dashboard() {
         const data=await res.json()
         setScheduleResponse(data)
         setLoading(false)
-        // console.log(data)
+        console.log(data)
 
     }
 
@@ -137,6 +137,7 @@ function Dashboard() {
         }
     ]
 
+    console.log(Loading)
 
     if (!rootElement) return null;
     return (
@@ -175,8 +176,8 @@ function Dashboard() {
 
                     {!Loading?
 
-                     
-                            scheduleResponse.scheduled ===false?  
+                     (
+                            [false,undefined].includes(scheduleResponse.scheduled)?  
                             <div className="p-4 overflow-y-auto">
 
 
@@ -284,7 +285,7 @@ function Dashboard() {
                                 <p>Link</p>
                                 <p>{scheduleResponse.link}</p>
                             </div>
-                        
+                        )
                     
                     :
                     
