@@ -10,7 +10,8 @@ export const Urls=()=>{
         login:`${url}auth/login/`,
         register:`${url}auth/register/`,
         logout:`${url}auth/logout/`,
-        google:`${url}auth/verify/social/google-oauth2/`
+        google:`${url}auth/verify/social/google-oauth2/`,
+        schedule_virtual_class:`${url}teacher/schedule/class/`
         
 
     }

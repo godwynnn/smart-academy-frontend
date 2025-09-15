@@ -19,7 +19,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { Urls } from '@/utils/urls'
 
+
+const url=Urls()
 function Dashboard() {
     const authData = useSelector((state) => state.authreducer)
     const dispatch = useDispatch()
@@ -28,11 +31,14 @@ function Dashboard() {
     const [rootElement, setRootElement] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
+    const [Loading, setLoading] = useState(false);
     const [scheduleData,setScheduleData]=useState({
+        'title':'',
         'date':'',
         'start':'',
         'end':''
     })
+    const [scheduleResponse,setScheduleResponse]=useState([])
     const slideRef=useRef([])
     const toggleBtnRef1=useRef([])
     const toggleBtnRef2=useRef([])
@@ -44,7 +50,25 @@ function Dashboard() {
         setIsOpen(false)
        
     }, []);
-    console.log(scheduleData)
+
+
+    const sendScheduleData=async ()=>{
+        setLoading(true)
+        const res=await fetch(url.schedule_virtual_class,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authData.accessToken.access}`,
+            },
+            method:'POST',
+            body:JSON.stringify(scheduleData)
+        })
+
+        const data=await res.json()
+        setScheduleResponse(data)
+        setLoading(false)
+        // console.log(data)
+
+    }
 
 
     const ChartData = {
@@ -148,7 +172,12 @@ function Dashboard() {
                                 </svg>
                             </button>
                         </div>
-                        <div className="p-4 overflow-y-auto">
+
+                    {!Loading?
+
+                     
+                            scheduleResponse.scheduled ===false?  
+                            <div className="p-4 overflow-y-auto">
 
 
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -201,7 +230,8 @@ function Dashboard() {
                                                 <div className="hs-carousel-slide" >
                                                     <div className="flex flex-col gap-5 h-full bg-gray-200 p-6">
                                                         <div className="space-y-3 w-[100%] flex flex-col items-center">
-                                                            <input type="text" className="py-2.5 border sm:py-3 px-4 block w-[100%]  border-gray-400 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Meeting Title" />
+                                                            <input type="text" onChange={e=>{
+                                                                setScheduleData(prev=>({...prev,"title":e.target.value}))}}  className="py-2.5 border sm:py-3 px-4 block w-[100%]  border-gray-400 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Meeting Title" />
                                                         </div>
 
 
@@ -217,7 +247,7 @@ function Dashboard() {
                                                         </DemoItem>
 
 
-                                                        <button type="button" className="py-2 px-3  items-center gap-x-2 text-sm  text-center font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                        <button type="button" onClick={sendScheduleData}  className="py-2 px-3  items-center gap-x-2 text-sm  text-center font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                                                             Schedule
                                                         </button>
                                                     </div>
@@ -249,6 +279,22 @@ function Dashboard() {
                             </LocalizationProvider>
 
                         </div>
+                            :
+                            <div className="p-4 overflow-y-auto">
+                                <p>Link</p>
+                                <p>{scheduleResponse.link}</p>
+                            </div>
+                        
+                    
+                    :
+                    
+                    <p>loading</p>
+                    }
+
+                       
+                        
+
+
                         <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200">
                             <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-scale-animation-modal">
                                 Close
