@@ -27,8 +27,8 @@ export default function Chat() {
   const params = useParams()
   const { fetchRoomName, roomName, SendChatData, startSocketConnection, setRoomName, setEntry } = useContext(ChatContext)
 
-  console.log(params.entry)
-  console.log(chatData)
+  // console.log(params.entry)
+  // console.log(chatData)
 
   const ExportToGoogleForm = (e) => {
     e.preventDefault()

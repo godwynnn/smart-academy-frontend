@@ -18,6 +18,9 @@
   .marquee_item p{
     @apply  text-center font-semibold 
   }
+  .react-calendar{
+    @apply bg-amber-700
+  }
 }
 
 :root {

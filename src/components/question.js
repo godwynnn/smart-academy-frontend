@@ -100,7 +100,7 @@ function QuestionComponent({chatData}) {
               :
 
               (val.messages.map((val, idx) => {
-
+                console.log(val)
                 return (
                   <li className="py-2 sm:py-4" key={idx}>
                     <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto">
@@ -130,8 +130,9 @@ function QuestionComponent({chatData}) {
                             <p className="text-1xl  text-gray-800 dark:text-neutral-800">
                               {val.question}
                             </p>
-
+                            
                             {val.options.map((option, idx) => {
+                              console.log(val)
                               return (<p className="text-sm text-gray-800 dark:text-neutral-800" key={idx}>
                                 {option}
                               </p>)

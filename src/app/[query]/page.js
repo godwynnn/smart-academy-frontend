@@ -131,18 +131,18 @@ export default function Query() {
 
             <div className="h-[80vh] space-y-4  overflow-y-auto  rounded-lg bg-white w-[100%] [&amp;::-webkit-scrollbar]:w-2 [&amp;::-webkit-scrollbar-track]:bg-gray-100 [&amp;::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&amp;::-webkit-scrollbar-track]:bg-neutral-700 dark:[&amp;::-webkit-scrollbar-thumb]:bg-neutral-500">
               {params.query == 'question' ?
-                <p className='text-lg font-bold px-3 pt-5' >Student Quiz</p >
+                <p className='text-3xl font-semibold px-3 pt-5' >Student Quiz</p >
                 :
-                <p className='text-lg font-bold px-3 pt-5' >Lesson Plan</p >
+                <p className='text-3xl font-semibold px-3 pt-5' >Lesson Plan</p >
               }
 
               <div className="flex flex-col">
                 <div className="-m-1.5 overflow-x-auto">
                   <div className="p-1.5 min-w-full inline-block align-middle">
-                    <div className="border border-gray-200 rounded-lg shadow-xs overflow-hidden">
+                    <div className={[`${data.length===0?'':'border border-gray-200 rounded-lg shadow-xs'}  overflow-hidden`]}>
 
                       {data.length === 0 ?
-                        <p className=' text-center text-2xl '>No content</p>
+                        <p className=' text-center text-4xl '>No content</p>
 
                         :
                         <table className="min-w-full divide-y divide-gray-200">

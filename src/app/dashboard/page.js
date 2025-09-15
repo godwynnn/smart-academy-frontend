@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import DashboardSidebar from '@/components/DashboardSidebar'
 import { useSelector, useDispatch } from 'react-redux'
@@ -10,11 +10,42 @@ import { ToastContainer, toast } from 'react-toastify';
 import DashboardHeader from '@/components/DashboardHeader'
 import Link from 'next/link'
 import Chart from 'react-apexcharts'
+import { PopupModal } from "react-calendly";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 function Dashboard() {
     const authData = useSelector((state) => state.authreducer)
     const dispatch = useDispatch()
     const router = useRouter()
+    const rootRef = useRef(document.getElementById("root")); // Or whatever your main app div id is
+    const [rootElement, setRootElement] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [startDate, setStartDate] = useState(new Date());
+    const [scheduleData,setScheduleData]=useState({
+        'date':'',
+        'start':'',
+        'end':''
+    })
+    const slideRef=useRef([])
+    const toggleBtnRef1=useRef([])
+    const toggleBtnRef2=useRef([])
+
+
+
+    useEffect(() => {
+        setRootElement(document.getElementById("__next") || document.body); // runs only on client
+        setIsOpen(false)
+       
+    }, []);
+    console.log(scheduleData)
+
 
     const ChartData = {
         options: {
@@ -53,7 +84,9 @@ function Dashboard() {
 
     }
 
-    console.log(authData)
+    
+    
+
     const events = [
         {
             title: 'STEM 2025',
@@ -80,11 +113,154 @@ function Dashboard() {
         }
     ]
 
+
+    if (!rootElement) return null;
     return (
         <>
+            <PopupModal
+                url="https://calendly.com/miraclegodwin67/30min"
+                //   pageSettings={this.props.pageSettings}
+                //   utm={this.props.utm}
+                //   prefill={this.props.prefill}
+                onModalClose={() => setIsOpen(false)}
+                open={isOpen}
+                /*
+                 * react-calendly uses React's Portal feature (https://reactjs.org/docs/portals.html) to render the popup modal. As a result, you'll need to
+                 * specify the rootElement property to ensure that the modal is inserted into the correct domNode.
+                 */
+                rootElement={rootElement}
+            />
 
 
-            <DashboardHeader Logout={Logout} authData={authData} />
+
+            <div id="hs-scale-animation-modal" className="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabIndex="-1" aria-labelledby="hs-scale-animation-modal-label">
+                <div className="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+                    <div className="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto">
+                        <div className="flex justify-between items-center py-3 px-4 border-b border-gray-200">
+                            <h3 id="hs-scale-animation-modal-label" className="font-bold text-gray-800">
+                                Schedule Lesson With Google Meet
+                            </h3>
+                            <button type="button" className="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none" aria-label="Close" data-hs-overlay="#hs-scale-animation-modal">
+                                <span className="sr-only">Close</span>
+                                <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M18 6 6 18"></path>
+                                    <path d="m6 6 12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div className="p-4 overflow-y-auto">
+
+
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer
+                                    components={[
+                                        'DatePicker',
+                                        'MobileDatePicker',
+                                        'DesktopDatePicker',
+                                        'StaticDatePicker',
+                                        'TimePicker',
+                                        'MobileTimePicker',
+                                        'DesktopTimePicker',
+                                        'StaticTimePicker',
+                                    ]}
+                                >
+                                    {/* Slider */}
+                                    <div data-hs-carousel='{
+    "loadingClasses": "opacity-0",
+    "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-2 border border-gray-400 rounded-full cursor-pointer"
+  }' className="relative">
+                                        <div className="hs-carousel relative overflow-hidden w-full min-h-[90vh] bg-white rounded-lg">
+                                            <div ref={slideRef} className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                                                <div className="hs-carousel-slide" >
+                                                    <div className="flex justify-center h-full w-full bg-gray-100 p-0">
+
+
+
+                                                        <DemoItem label=" ">
+                                                            <StaticDatePicker 
+                                                            onAccept={e=>{setScheduleData(prev=>({...prev,'date':`${e.year()}-${e.month()}-${e.date()}`}))
+                                                            
+                                                            slideRef.current.children[0].classList.remove('active')
+                                                            slideRef.current.children[1].classList.add('active')
+                                                            slideRef.current.style.transform="translate(-454.1px, 0px)"
+                                                            toggleBtnRef1.current.classList.remove('disabled')
+                                                            toggleBtnRef2.current.classList.add('disabled')
+                                                            toggleBtnRef2.current.disabled=true
+                                                            toggleBtnRef2.current.disabled=false
+
+                                                            }} className='w-full' defaultValue={dayjs('2022-04-17')} />
+                                                        </DemoItem>
+
+
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div className="hs-carousel-slide" >
+                                                    <div className="flex flex-col gap-5 h-full bg-gray-200 p-6">
+                                                        <div className="space-y-3 w-[100%] flex flex-col items-center">
+                                                            <input type="text" className="py-2.5 border sm:py-3 px-4 block w-[100%]  border-gray-400 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Meeting Title" />
+                                                        </div>
+
+
+                                                        <DemoItem label="Start Time">
+                                                            <TimePicker ampm={true}  onAccept={e=>{
+                                                                setScheduleData(prev=>({...prev,"start":`${e.hour()}:${e.minute()}`}))}} defaultValue={dayjs('2022-04-17T15:30')} />
+                                                        </DemoItem>
+
+                                                        <DemoItem label="End Time">
+                                                            <TimePicker ampm={true}  onAccept={e=>{
+                                                                console.log(e)
+                                                                setScheduleData(prev=>({...prev,"end":`${e.hour()}:${e.minute()}`}))}} defaultValue={dayjs('2022-04-17T15:30')} />
+                                                        </DemoItem>
+
+
+                                                        <button type="button" className="py-2 px-3  items-center gap-x-2 text-sm  text-center font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                            Schedule
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <button ref={toggleBtnRef1} type="button" className="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default relative top-1/2 right-0 start-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+                                            <span className="text-2xl" aria-hidden="true">
+                                                <svg className="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="m15 18-6-6 6-6"></path>
+                                                </svg>
+                                            </span>
+                                            <span className="sr-only">Previous</span>
+                                        </button>
+                                        <button ref={toggleBtnRef2} type="button" className="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default relative top-1/2 end-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+                                            <span className="sr-only">Next</span>
+                                            <span className="text-2xl" aria-hidden="true">
+                                                <svg className="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="m9 18 6-6-6-6"></path>
+                                                </svg>
+                                            </span>
+                                        </button>
+
+                                    </div>
+                                    {/* End Slider */}
+                                </DemoContainer>
+                            </LocalizationProvider>
+
+                        </div>
+                        <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200">
+                            <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-scale-animation-modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div >
+
+
+            <DashboardHeader Logout={Logout} authData={authData} setIsOpen={setIsOpen} />
 
 
             <DashboardSidebar />
@@ -92,7 +268,7 @@ function Dashboard() {
 
 
             {/* Content */}
-            <div className="w-full lg:ps-64">
+            <div className="w-full lg:ps-64" id='root'>
                 <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
 
 
