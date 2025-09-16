@@ -22,7 +22,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { Urls } from '@/utils/urls'
 
 
-const url=Urls()
+const url = Urls()
 function Dashboard() {
     const authData = useSelector((state) => state.authreducer)
     const dispatch = useDispatch()
@@ -31,42 +31,47 @@ function Dashboard() {
     const [rootElement, setRootElement] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
-    const [Loading, setLoading] = useState(false);
-    const [scheduleData,setScheduleData]=useState({
-        'title':'',
-        'date':'',
-        'start':'',
-        'end':''
+    const [scheduledCheck, setScheduledCheck] = useState({
+        'loading': false,
+        'scheduled': false
+    });
+    const [scheduleData, setScheduleData] = useState({
+        'title': '',
+        'date': '',
+        'start': '',
+        'end': ''
     })
-    const [scheduleResponse,setScheduleResponse]=useState([])
-    const slideRef=useRef([])
-    const toggleBtnRef1=useRef([])
-    const toggleBtnRef2=useRef([])
+    const [scheduleResponse, setScheduleResponse] = useState([])
+    const slideRef = useRef([])
+    const toggleBtnRef1 = useRef([])
+    const toggleBtnRef2 = useRef([])
 
 
 
     useEffect(() => {
         setRootElement(document.getElementById("__next") || document.body); // runs only on client
         setIsOpen(false)
-       
+
     }, []);
 
 
-    const sendScheduleData=async ()=>{
-        setLoading(true)
-        const res=await fetch(url.schedule_virtual_class,{
+    const sendScheduleData = async () => {
+        setScheduledCheck(prev => ({ ...prev, 'loading': true, 'scheduled': false }))
+        const res = await fetch(url.schedule_virtual_class, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${authData.accessToken.access}`,
             },
-            method:'POST',
-            body:JSON.stringify(scheduleData)
+            method: 'POST',
+            body: JSON.stringify(scheduleData)
         })
 
-        const data=await res.json()
+        const data = await res.json()
         setScheduleResponse(data)
-        setLoading(false)
-        console.log(data)
+        setScheduledCheck(prev => ({ ...prev, 'loading': false, 'scheduled': true }))
+        console.log(data.link)
+        window.open(data.link, '_blank', 'noopener noreferrer');
+
 
     }
 
@@ -108,8 +113,8 @@ function Dashboard() {
 
     }
 
-    
-    
+
+
 
     const events = [
         {
@@ -137,7 +142,7 @@ function Dashboard() {
         }
     ]
 
-    console.log(Loading)
+    console.log(scheduledCheck)
 
     if (!rootElement) return null;
     return (
@@ -174,126 +179,150 @@ function Dashboard() {
                             </button>
                         </div>
 
-                    {Loading === false?
 
-                     (
-                            [false,undefined].includes(scheduleResponse.scheduled)?  
+
+                        {
+                            // [false,undefined].includes(scheduleResponse.scheduled)?  
                             <div className="p-4 overflow-y-auto">
 
 
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer
-                                    components={[
-                                        'DatePicker',
-                                        'MobileDatePicker',
-                                        'DesktopDatePicker',
-                                        'StaticDatePicker',
-                                        'TimePicker',
-                                        'MobileTimePicker',
-                                        'DesktopTimePicker',
-                                        'StaticTimePicker',
-                                    ]}
-                                >
-                                    {/* Slider */}
-                                    <div data-hs-carousel='{
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DemoContainer
+                                        components={[
+                                            'DatePicker',
+                                            'MobileDatePicker',
+                                            'DesktopDatePicker',
+                                            'StaticDatePicker',
+                                            'TimePicker',
+                                            'MobileTimePicker',
+                                            'DesktopTimePicker',
+                                            'StaticTimePicker',
+                                        ]}
+                                    >
+                                        {/* Slider */}
+                                        <div data-hs-carousel='{
     "loadingClasses": "opacity-0",
     "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-2 border border-gray-400 rounded-full cursor-pointer"
   }' className="relative">
-                                        <div className="hs-carousel relative overflow-hidden w-full min-h-[90vh] bg-white rounded-lg">
-                                            <div ref={slideRef} className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-                                                <div className="hs-carousel-slide" >
-                                                    <div className="flex justify-center h-full w-full bg-gray-100 p-0">
+                                            <div className="hs-carousel relative overflow-hidden w-full min-h-[90vh] bg-white rounded-lg">
+                                                <div ref={slideRef} className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                                                    <div className="hs-carousel-slide" >
+                                                        <div className="flex justify-center h-full w-full bg-gray-100 p-0">
 
 
 
-                                                        <DemoItem label=" ">
-                                                            <StaticDatePicker 
-                                                            onAccept={e=>{setScheduleData(prev=>({...prev,'date':`${e.year()}-${e.month()}-${e.date()}`}))
-                                                            
-                                                            slideRef.current.children[0].classList.remove('active')
-                                                            slideRef.current.children[1].classList.add('active')
-                                                            slideRef.current.style.transform="translate(-454.1px, 0px)"
-                                                            toggleBtnRef1.current.classList.remove('disabled')
-                                                            toggleBtnRef2.current.classList.add('disabled')
-                                                            toggleBtnRef2.current.disabled=true
-                                                            toggleBtnRef2.current.disabled=false
+                                                            <DemoItem label=" ">
+                                                                <StaticDatePicker
+                                                                    onAccept={e => {
+                                                                        setScheduleData(prev => ({ ...prev, 'date': `${e.year()}-${e.month()}-${e.date()}` }))
 
-                                                            }} className='w-full' defaultValue={dayjs('2022-04-17')} />
-                                                        </DemoItem>
+                                                                        slideRef.current.children[0].classList.remove('active')
+                                                                        slideRef.current.children[1].classList.add('active')
+                                                                        slideRef.current.style.transform = "translate(-454.1px, 0px)"
+                                                                        toggleBtnRef1.current.classList.remove('disabled')
+                                                                        toggleBtnRef2.current.classList.add('disabled')
+                                                                        toggleBtnRef2.current.disabled = true
+                                                                        toggleBtnRef2.current.disabled = false
 
-
-
-                                                    </div>
-                                                </div>
+                                                                    }} className='w-full' defaultValue={dayjs('2022-04-17')} />
+                                                            </DemoItem>
 
 
 
-                                                <div className="hs-carousel-slide" >
-                                                    <div className="flex flex-col gap-5 h-full bg-gray-200 p-6">
-                                                        <div className="space-y-3 w-[100%] flex flex-col items-center">
-                                                            <input type="text" onChange={e=>{
-                                                                setScheduleData(prev=>({...prev,"title":e.target.value}))}}  className="py-2.5 border sm:py-3 px-4 block w-[100%]  border-gray-400 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Meeting Title" />
                                                         </div>
-
-
-                                                        <DemoItem label="Start Time">
-                                                            <TimePicker ampm={true}  onAccept={e=>{
-                                                                setScheduleData(prev=>({...prev,"start":`${e.hour()}:${e.minute()}`}))}} defaultValue={dayjs('2022-04-17T15:30')} />
-                                                        </DemoItem>
-
-                                                        <DemoItem label="End Time">
-                                                            <TimePicker ampm={true}  onAccept={e=>{
-                                                                console.log(e)
-                                                                setScheduleData(prev=>({...prev,"end":`${e.hour()}:${e.minute()}`}))}} defaultValue={dayjs('2022-04-17T15:30')} />
-                                                        </DemoItem>
-
-
-                                                        <button type="button" onClick={sendScheduleData}  className="py-2 px-3  items-center gap-x-2 text-sm  text-center font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                                                            Schedule
-                                                        </button>
                                                     </div>
+
+
+
+                                                    <div className="hs-carousel-slide" >
+                                                        <div className="flex flex-col gap-5 h-full bg-gray-200 p-6">
+                                                            <div className="space-y-3 w-[100%] flex flex-col items-center">
+                                                                <input type="text" onChange={e => {
+                                                                    setScheduleData(prev => ({ ...prev, "title": e.target.value }))
+                                                                }} className="py-2.5 border sm:py-3 px-4 block w-[100%]  border-gray-400 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Meeting Title" />
+                                                            </div>
+
+
+                                                            <DemoItem label="Start Time">
+                                                                <TimePicker ampm={true} onAccept={e => {
+                                                                    setScheduleData(prev => ({ ...prev, "start": `${e.hour()}:${e.minute()}` }))
+                                                                }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                                            </DemoItem>
+
+                                                            <DemoItem label="End Time">
+                                                                <TimePicker ampm={true} onAccept={e => {
+                                                                    console.log(e)
+                                                                    setScheduleData(prev => ({ ...prev, "end": `${e.hour()}:${e.minute()}` }))
+                                                                }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                                            </DemoItem>
+
+                                                            {!scheduledCheck.loading ?
+
+                                                                (!scheduledCheck.scheduled ?
+                                                                    <button type="button" onClick={sendScheduleData} className="py-2 px-3  items-center gap-x-2 text-sm  text-center font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                                        Schedule
+                                                                    </button>
+                                                                    :
+                                                                    <>
+                                                                        <button type="button" onClick={() => console.log(scheduleData)} className="py-2 px-3  items-center gap-x-2 text-sm  text-center font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                                            Goggle Calendar
+                                                                        </button>
+
+                                                                        <button type="button" onClick={() => setScheduledCheck((prev) => ({ ...prev, 'scheduled': false }))} className="py-2 px-3  items-center gap-x-2 text-sm  text-center font-medium rounded-lg border border-transparent bg-gray-600 text-white hover:bg-gray-700 focus:outline-hidden focus:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                                            Re-Schedule
+                                                                        </button>
+                                                                    </>
+                                                                )
+
+
+                                                                :
+                                                                <div className='flex items-center justify-center'>
+                                                                    <div className="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-gray-400 rounded-full" role="status" aria-label="loading">
+                                                                    <span className="sr-only text-center">Loading...</span>
+                                                                </div>
+                                                                </div>
+                                                                
+                                                            }
+
+
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-
                                             </div>
+
+                                            <button ref={toggleBtnRef1} type="button" className="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default relative top-1/2 right-0 start-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+                                                <span className="text-2xl" aria-hidden="true">
+                                                    <svg className="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <path d="m15 18-6-6 6-6"></path>
+                                                    </svg>
+                                                </span>
+                                                <span className="sr-only">Previous</span>
+                                            </button>
+                                            <button ref={toggleBtnRef2} type="button" className="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default relative top-1/2 end-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+                                                <span className="sr-only">Next</span>
+                                                <span className="text-2xl" aria-hidden="true">
+                                                    <svg className="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <path d="m9 18 6-6-6-6"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+
                                         </div>
+                                        {/* End Slider */}
+                                    </DemoContainer>
+                                </LocalizationProvider>
 
-                                        <button ref={toggleBtnRef1} type="button" className="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default relative top-1/2 right-0 start-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
-                                            <span className="text-2xl" aria-hidden="true">
-                                                <svg className="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="m15 18-6-6 6-6"></path>
-                                                </svg>
-                                            </span>
-                                            <span className="sr-only">Previous</span>
-                                        </button>
-                                        <button ref={toggleBtnRef2} type="button" className="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default relative top-1/2 end-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
-                                            <span className="sr-only">Next</span>
-                                            <span className="text-2xl" aria-hidden="true">
-                                                <svg className="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="m9 18 6-6-6-6"></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-
-                                    </div>
-                                    {/* End Slider */}
-                                </DemoContainer>
-                            </LocalizationProvider>
-
-                        </div>
-                            :
-                            <div className="p-4 overflow-y-auto text-black">
-                                <p>Link</p>
-                                <p>{scheduleResponse.link}</p>
                             </div>
-                        )
-                    
-                    :
-                    
-                    <p>loading</p>
-                    }
+                            // :
+                            // <div className="p-4 overflow-y-auto text-black">
+                            //     <p>Link</p>
+                            //     <p>{scheduleResponse.link}</p>
+                            // </div>
 
-                       
-                        
+
+                        }
+
 
 
                         <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200">
