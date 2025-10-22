@@ -1,6 +1,6 @@
 export const Urls=()=>{
-    // const url='http://127.0.0.1:8000/'
-    const url='https://smart-academy-ujq0.onrender.com/'
+    const url='http://127.0.0.1:8000/'
+    // const url='https://smart-academy-ujq0.onrender.com/'
 
     return{
         ws_url:'ws://127.0.0.1:8000/ws/chat/',
@@ -11,7 +11,11 @@ export const Urls=()=>{
         register:`${url}auth/register/`,
         logout:`${url}auth/logout/`,
         google:`${url}auth/verify/social/google-oauth2/`,
-        schedule_virtual_class:`${url}teacher/schedule/class/`
+        schedule_virtual_class:`${url}teacher/schedule/class/`,
+        create_question:`${url}question/create/`,
+        get_question:`${url}question`
+
+
         
 
     }

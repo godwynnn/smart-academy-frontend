@@ -20,23 +20,26 @@ const url = Urls()
 export default function Chat() {
 
   const dispatch = useDispatch()
-  const chatData = useSelector((state) => state.chatreducer)
+  // const chatData = useSelector((state) => state.chatreducer)
   const authData = useSelector((state) => state.authreducer)
   const ws = useRef(null)
   const router = useRouter()
   const params = useParams()
   const { fetchRoomName, roomName, SendChatData, startSocketConnection, setRoomName, setEntry } = useContext(ChatContext)
-
+  const [chatData, setChatData] = useState({
+    'data': [],
+    'loading': true
+  })
   // console.log(params.entry)
   // console.log(chatData)
 
   const ExportToGoogleForm = (e) => {
     e.preventDefault()
-    fetch(`${url.export_to_form}/${params.id}/`,{
+    fetch(`${url.export_to_form}/${params.id}/`, {
       headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authData.accessToken.access}`,
-            },
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authData.accessToken.access}`,
+      },
 
     })
       .then((res) => { return res.json() })
@@ -48,15 +51,40 @@ export default function Chat() {
 
   }
 
+  const getData = () => {
+    // dispatch(ChatAction.SetQuestionData({ 'relayed': false, 'from_ws': true, 'loading': true }))
+    setChatData({'loading': true })
+    fetch(`${url.get_question}/${params.id}/`, {
+
+      headers: {
+        'Authorization': `Bearer ${authData.accessToken.access}`,
+      },
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return res.json(); // Parse the response as JSON
+
+
+    }).then((data) => {
+      console.log(data)
+      setChatData({'data': data.data, 'loading': false })
+      // dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': data, 'from_ws': true, 'loading': false, }))
+    })
+
+
+
+  }
+
 
   useEffect(() => {
 
 
-    setRoomName({ 'room_name': params.id })
+    // setRoomName({ 'room_name': params.id })
 
+    getData()
 
-
-  }, [params.id])
+  },[])
 
 
 
@@ -82,12 +110,16 @@ export default function Chat() {
         {/* <!-- End Title --> */}
 
 
+        {!chatData.loading ?
+          params.entry === 'question' ?
+            <QuestionComponent chatData={chatData} />
+            :
+            <LessonComponent chatData={chatData} />
 
-        {params.entry === 'question' ?
-          <QuestionComponent chatData={chatData} />
           :
-          <LessonComponent chatData={chatData} />
+          <p>loading</p>
         }
+
 
 
 

@@ -62,14 +62,17 @@ export const ChatProvider = ({ children }) => {
         //     'relayed': false,
         //     'prompt_type': prompt_type
         // }))
-        ws.current.send(
-            JSON.stringify({
-                'message': chatData,
-                'username': 'a',
-                'generate_id': roomName.room_name,
-                'prompt_type': prompt_type
-            })
-        )
+
+
+
+        // ws.current.send(
+        //     JSON.stringify({
+        //         'message': chatData,
+        //         'username': 'a',
+        //         'generate_id': roomName.room_name,
+        //         'prompt_type': prompt_type
+        //     })
+        // )
     }
 
 
@@ -78,61 +81,58 @@ export const ChatProvider = ({ children }) => {
     // WEBSOCKET
 
 
-    useLayoutEffect(() => {
-        if (roomName?.room_name) {
-            ws.current = new w3cwebsocket(`${url.ws_url}${roomName.room_name}/?token=${authData.accessToken.access}`)
+    // useLayoutEffect(() => {
+    //     if (roomName?.room_name) {
+    //         ws.current = new w3cwebsocket(`${url.ws_url}${roomName.room_name}/?token=${authData.accessToken.access}`)
 
-            ws.current.onopen = () => {
-                console.log('open')
-            }
-            ws.current.onmessage = (event) => {
+    //         ws.current.onopen = () => {
+    //             console.log('open')
+    //         }
+    //         ws.current.onmessage = (event) => {
 
-                const message = JSON.parse(event.data)
+    //             const message = JSON.parse(event.data)
                 
+    //             console.log(message)
 
+    //             if (message.sent_by == 'user') {
 
-                if (message.sent_by == 'user') {
+    //                 console.log('ok')
 
-                    console.log('ok')
-
-                    if (message.type === 'chat_message') {
-                        dispatch(ChatAction.SetQuestionData({ 'relayed': false, 'data': message, 'from_ws': true, 'loading': false, }))
-                        router.push(`${params.entry}/c/${roomName.room_name}`)
-                    }
-
-
-
-
-                    if (message.type === 'chat_history') {
-                        dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
-
-                    }
-
-                }
-
-                else {
-                    console.log('before ', chatData)
-                    dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
-
-                }
+    //                 if (message.type === 'chat_message') {
+    //                     dispatch(ChatAction.SetQuestionData({ 'relayed': false, 'data': message, 'from_ws': true, 'loading': false, }))
+    //                     router.push(`${params.entry}/c/${roomName.room_name}`)
+    //                 }
 
 
 
 
+    //                 if (message.type === 'chat_history') {
+    //                     dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
+
+    //                 }
+
+    //             }
+
+    //             else {
+    //                 console.log('before ', chatData)
+    //                 dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': message, 'from_ws': true, 'loading': false, }))
+
+    //             }
 
 
-            }
-        }
-    }, [roomName])
+
+
+
+
+    //         }
+    //     }
+    // }, [roomName])
     // console.log(roomName)
 
 
-    const startSocketConnection = () => {
-
-
-    }
-
-
+const startSocketConnection=()=>{
+    
+}
 
 
 

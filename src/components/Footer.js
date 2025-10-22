@@ -16,7 +16,7 @@ export default function Footer() {
     {/* End Col */}
 
     <div className="mt-3">
-      <p className="text-gray-500">Developed by <Link className="text-blue-200 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">ALGRIOD</Link></p>
+      <p className="text-gray-500">Developed by <Link className="text-blue-200 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="https://zerolatenc.vercel.app/">ZEROLATENC</Link></p>
       <p className="text-gray-500">
         © 2025 Smart Academy
       </p>
