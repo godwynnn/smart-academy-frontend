@@ -1,9 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 const middleware = (req: NextRequest) => {
+    const url=req.nextUrl
+    let hostname=req.headers.get('host')||"";
+    console.log(hostname)
+    const PUBLIC_ROUTES = ['/', '/auth/login', '/auth/register'];
+
+    const rootDomain="smartacademy-gamma.vercel.app"
+    const isLocahost=hostname.includes("localhost")
+
+    let subdomain=""
+    // if(!isLocahost && hostname.endsWith(`.${rootDomain}`)){
+    //     subdomain=hostname.replace(`.${rootDomain}`,"").split(".")[0]
+    // }
+    
+
 
     const token = req.cookies.get('access_token')?.value || null
-    const pathname = req.nextUrl.pathname;
-    const PUBLIC_ROUTES = ['/', '/auth/login', '/auth/register'];
+    const pathname = url.pathname;
+    
     console.log('Inside Middleware ', pathname)
 
     const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
@@ -21,7 +35,22 @@ const middleware = (req: NextRequest) => {
     }
 
 
+    // if(hostname.startsWith('app.')){
+    //     url.pathname=`${url.pathname}`
+        
+    //     return NextResponse.rewrite(url)
+    // }
+    
+    // if(!hostname.startsWith('app.')){
+    //     url.pathname='/'
+    //     return NextResponse.rewrite(url)
+    // }
+    
     return NextResponse.next()
+    
+
+
+    
 
 
 

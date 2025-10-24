@@ -22,7 +22,7 @@ export default function Question() {
     const params = useParams()
     const router = useRouter()
     const authData = useSelector((state) => state.authreducer)
-    
+
     const chatData = useSelector((state) => state.chatreducer)
     const dispatch = useDispatch()
     const prompt_type = params.entry
@@ -72,25 +72,35 @@ export default function Question() {
     const SendChatData = async (e, prompt_type) => {
         e.preventDefault()
         dispatch(ChatAction.SetQuestionData({ 'relayed': false, 'from_ws': true, 'loading': true, }))
-        const res = await fetch(url.create_question, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authData.accessToken.access}`,
-            },
-            body: JSON.stringify(
-                {
-                    'message': chatData,
-                    'username': 'a',
-                    'generate_id': roomName.room_name,
-                    'prompt_type': prompt_type
-                }
-            )
-        })
-        const data = await res.json(); // Pauses until parsing JSON resolves
-        // dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': data, 'from_ws': true, 'loading': false, }))
-        console.log(data)
-        router.push(`${params.entry}/c/${data.data.id_tag}`)
+
+        try {
+            const res = await fetch(url.create_question, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authData.accessToken.access}`,
+                },
+                body: JSON.stringify(
+                    {
+                        'message': chatData,
+                        'username': 'a',
+                        'generate_id': roomName.room_name,
+                        'prompt_type': prompt_type
+                    }
+                )
+            })
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const data = await res.json(); // Pauses until parsing JSON resolves
+            dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': data, 'from_ws': true, 'loading': false, }))
+
+            router.push(`${params.entry}/c/${data.data.id_tag}`)
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            dispatch(ChatAction.SetQuestionData({ 'relayed': true, 'data': [], 'from_ws': true, 'loading': false, }))
+        }
+
 
     }
 
