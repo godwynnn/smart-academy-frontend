@@ -29,22 +29,25 @@ export default function Register() {
 
             })
             setLoading(false)
+        } else {
+            
+            toast.success(responseData.message, {
+                theme: "light",
+
+            })
+            setLoading(false)
+            router.push('/auth/login')
         }
 
-        toast.success(responseData.message, {
-            theme: "light",
 
-        })
-        setLoading(false)
-        router.push('/auth/login')
 
 
 
 
     }
     return (
-        <div className='flex min-h-[100vh] justify-center items-center bg-[#001219]'>
-            <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-2xs lg:w-[30%] md:w-[40%] sm:w-[50%] max-sm:w-[80%]">
+        <div className='flex min-h-[100vh] justify-center items-center bg-[#001219] px-4'>
+            <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-2xs lg:w-[35%] md:w-[40%] sm:w-[50%] max-sm:w-[100%]">
                 <div className="p-4 sm:p-7">
                     <div className="text-center">
                         <h1 className="block text-2xl font-bold text-gray-800">Sign up</h1>
