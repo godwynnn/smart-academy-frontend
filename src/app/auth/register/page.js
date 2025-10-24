@@ -135,7 +135,7 @@ export default function Register() {
                                 {/* End Form Group */}
 
                                 {/* Form Group */}
-                                <div>
+                                {/* <div>
                                     <label htmlFor="confirm-password" className="block text-sm mb-2">Confirm Password</label>
                                     <div className="relative">
                                         <input onChange={e => setData(prev => ({ ...prev, 'confirm_password': e.target.value }))} type="password" id="confirm-password" name="confirm_password" className="py-2.5 sm:py-3 px-4 block w-full border-gray-300  border-b-1 outline-0 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="confirm-password-error" />
@@ -146,7 +146,7 @@ export default function Register() {
                                         </div>
                                     </div>
                                     <p className="hidden text-xs text-red-600 mt-2" id="confirm-password-error">Password does not match the password</p>
-                                </div>
+                                </div> */}
                                 {/* End Form Group */}
 
                                 {/* Checkbox */}
