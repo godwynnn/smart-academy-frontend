@@ -1,7 +1,9 @@
 export const Urls=()=>{
-    let url='http://127.0.0.1:8000/'
-    if (process.env.NEXT_ENVIRONMENT === 'prod'){
+    var url='http://127.0.0.1:8000/'
+    if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'prod'){
         url='https://smart-academy-ujq0.onrender.com/'
+        
+        
     }
     
 
